@@ -975,11 +975,27 @@ void peruskoulu(void)
 {
 	system("cls");
 
-	int i, kysymysmaara = 0, x, pisteet = 0, eka, toka, tulos, vastaus = 0;
+	int i = 0, kysymysmaara = 0, x, pisteet = 0, eka, toka, tulos, vastaus = 0;
 
 	srand(time(NULL));
 
 	printf("Lopeta luvulla (-100)\n");
+	printf("Tilastoille paasemiseksi pitaa vastata vahintaan 10 kysymykseen.\n");
+
+	typedef struct top {
+		char nimi[20];
+		int k_maara;
+		int o_vastaus;
+		float prossa;
+	}Top[10];
+
+	for (i = 0; i < 10; i++) //pistetaulukon alustus (selvityksen alla että miksi ei toimi)
+	{
+		Top[i].nimi = "tyhja";
+		Top[i].k_maara = 0;
+		Top[i].o_vastaus = 0;
+		Top[i].prossa = 0;
+	}
 
 	do
 	{
