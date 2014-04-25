@@ -975,8 +975,8 @@ void peruskoulu(void)
 {
 	system("cls");
 
-	int i = 0, kysymysmaara = 0, x, pisteet = 0, eka, toka, tulos, vastaus = 0;
-	FILE *taulu;
+	int i = 0, k,kysymysmaara = 0, x, pisteet = 0, eka, toka, tulos, vastaus = 0, nimi, tarkastus = 0, z = 1;
+	FILE *taulu, *pnimi;
 
 	srand(time(NULL));
 
@@ -991,11 +991,12 @@ void peruskoulu(void)
 	}TOP;
 
 	TOP Top[10];
+	TOP Nyk;
 
 	for (i = 0; i < 10; i++) //pistetaulukon alustus
 	{
 		strcpy(Top[i].nimi, "tyhja");
-		Top[i].k_maara = 0;
+		Top[i].k_maara = 10;
 		Top[i].o_vastaus = 0;
 		Top[i].prossa = 0;
 	}
@@ -1019,6 +1020,10 @@ void peruskoulu(void)
 			fscanf(taulu, "%s, %d, %d, %.f\n", &Top[i].nimi, &Top[i].k_maara, &Top[i].o_vastaus, &Top[i].prossa);
 		}
 	}
+
+	pnimi = fopen("tulos.txt", "r");
+	fscanf(pnimi, "%s", &Nyk.nimi);
+	fclose(pnimi);
 
 	do
 	{
@@ -1131,6 +1136,45 @@ void peruskoulu(void)
 			kysymysmaara++;
 		}
 	} while (vastaus != -100);
+
+	Nyk.k_maara = kysymysmaara - 1;
+	Nyk.o_vastaus = pisteet;
+	Nyk.prossa = (pisteet / (kysymysmaara - 1));
+
+	do
+	{
+		for (i = 0; i < 10; i++)
+		{
+			if (Nyk.prossa > Top[i].prossa)
+			{
+				for (k = (10 - i); k < 0; k--)
+				{
+					strcpy(Top[i+z].nimi, Top[i+(z + 1)].nimi);
+					Top[i + z].k_maara = Top[i+(z + 1)].k_maara;
+					Top[i + z].o_vastaus = Top[i+(z + 1)].o_vastaus;
+					Top[i + z].prossa = Top[i+(z + 1)].prossa;
+					z++;
+				}
+
+				strcpy(Top[i].nimi, Nyk.nimi);
+				Top[i].k_maara = Nyk.k_maara;
+				Top[i].o_vastaus = Nyk.o_vastaus;
+				Top[i].prossa = Nyk.prossa;
+				
+				tarkastus + 1;
+			}
+			else
+			{
+			}
+		}
+	} while (tarkastus == 0);
+
+	taulu = fopen("perus", "w");
+	
+	for (i = 0; i < 10; i++)
+	{
+		fprintf(taulu, "%s, %d, %d, %.f\n", Top[i].nimi, Top[i].k_maara, Top[i].o_vastaus, Top[i].prossa);
+	}
 
 	printf("Pisteesi on %d / %d\n", pisteet, kysymysmaara - 1);
 
