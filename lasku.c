@@ -979,6 +979,11 @@ void peruskoulu(void)
 	FILE *taulu, *pnimi;
 	float pisteet = 0;
 
+	//väliaikaiset
+	char v_nimi[20];
+	float v_fnumero;
+	int v_numero;
+
 	srand(time(NULL));
 
 	printf("Lopeta luvulla (-100)\n");
@@ -1152,18 +1157,19 @@ void peruskoulu(void)
 				{
 					do
 					{
-						for (k = (10 - i); k > 0; k--) //laita välimuuttuja
+						for (k = (10 - i); k > 0; k--)
 						{
-							strcpy(Top[i + z].nimi, Top[i + (z + 1)].nimi);
-							Top[i + z].k_maara = Top[i + (z + 1)].k_maara;
-							Top[i + z].o_vastaus = Top[i + (z + 1)].o_vastaus;
-							Top[i + z].prossa = Top[i + (z + 1)].prossa;
-							z++;
+							for (x = (10 - i); x < 0; x--)
+							{
+								//siirrä top tilaston loppuosa yksi alaspäin
+							}
 						}
-						strcpy(Top[i].nimi, Nyk.nimi);
-						Top[i].k_maara = Nyk.k_maara;
-						Top[i].o_vastaus = Nyk.o_vastaus;
-						Top[i].prossa = Nyk.prossa;
+						Top[i] = Nyk; //kokeilu että toimisiko tällei
+
+						//strcpy(Top[i].nimi, Nyk.nimi);
+						//Top[i].k_maara = Nyk.k_maara;
+						//Top[i].o_vastaus = Nyk.o_vastaus;
+						//Top[i].prossa = Nyk.prossa;
 
 						tarkastus++;
 					} while (tarkastus == 0);
