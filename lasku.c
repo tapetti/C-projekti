@@ -455,7 +455,7 @@ void vaikea(void)
 				fflush(stdin);
 				scanf("%d", &vastaus);
 
-				tulos = toka - eka;				
+				tulos = toka - eka;
 
 				if (vastaus == tulos)
 				{
@@ -535,7 +535,7 @@ void vaikea(void)
 			}
 
 			printf("Mika on seuraavan laskun tulos:(pyorista kokonaislukuun)\n%d x ? = %d\n", eka, toka); //x kertomerkkina koska * saattaa aiheuttaa onglemia
-			
+
 			fflush(stdin);
 			scanf("%d", &vastaus);
 
@@ -557,7 +557,7 @@ void vaikea(void)
 				printf("tapahtui virhe! ((vaikea_4))\n paina ENTER"); //virhekoodi (vaikea_4)
 
 				fflush(stdin);
-				getchar();	
+				getchar();
 			}
 
 			tulostaja(&i, &kysymysMaara, &x, &eka, &toka, (int *)&kerto_tulos, &vastaus, &pisteet);
@@ -578,7 +578,7 @@ void vaikea(void)
 				}
 
 				printf("Mika on seuraavan laskun tulos (pyorista kokonaislukuun):\n%d / ? = %d\n", eka, toka);
-				
+
 				fflush(stdin);
 				scanf("%d", &vastaus);
 
@@ -617,7 +617,7 @@ void vaikea(void)
 				}
 
 				printf("Mika on seuraavan laskun tulos (pyorista kokonaislukuun):\n? / %d = %d\n", eka, toka);
-				
+
 				fflush(stdin);
 				scanf("%d", &vastaus);
 
@@ -653,7 +653,7 @@ void vaikea(void)
 			fflush(stdin);
 			getchar();
 		}
-	}	
+	}
 
 	printf("\n\nPisteesi on %d/%d\nPaina ENTER palataksesi menuun", pisteet, kysymysMaara);
 
@@ -975,8 +975,9 @@ void peruskoulu(void)
 {
 	system("cls");
 
-	int i = 0, k,kysymysmaara = 0, x, pisteet = 0, eka, toka, tulos, vastaus = 0, nimi, tarkastus = 0, z = 1;
+	int i = 0, k, kysymysmaara = 0, x, eka, toka, tulos, vastaus = 0, nimi, tarkastus = 0, z = 1;
 	FILE *taulu, *pnimi;
+	float pisteet = 0;
 
 	srand(time(NULL));
 
@@ -1009,7 +1010,7 @@ void peruskoulu(void)
 
 		for (i = 0; i < 10; i++)
 		{
-			fprintf(taulu,"%s, %d, %d, %.f\n", Top[i].nimi, Top[i].k_maara, Top[i].o_vastaus, Top[i].prossa);
+			fprintf(taulu, "%s, %d, %d, %.f\n", Top[i].nimi, Top[i].k_maara, Top[i].o_vastaus, Top[i].prossa);
 		}
 	}
 	else
@@ -1111,10 +1112,10 @@ void peruskoulu(void)
 			tulos = eka * toka;
 
 			printf("Mika on seuraavan laskun tulos:\n%d x %d = ?\n", eka, toka); //x kertomerkkina koska * saattaa aiheuttaa onglemia
-			
+
 			fflush(stdin);
 			scanf("%d", &vastaus);
-			
+
 			if (vastaus == tulos)
 			{
 				printf("\noikein\n\n\n");
@@ -1136,7 +1137,7 @@ void peruskoulu(void)
 			kysymysmaara++;
 		}
 	} while (vastaus != -100);
-	
+
 	if (kysymysmaara > 9)
 	{
 		Nyk.k_maara = kysymysmaara - 1;
@@ -1145,44 +1146,73 @@ void peruskoulu(void)
 
 		do
 		{
-			for (i = 0; i < 10; i++)
+			for (i = 0; i < 10 && tarkastus == 0; i++)
 			{
 				if (Nyk.prossa > Top[i].prossa)
 				{
-					for (k = (10 - i); k < 0; k--)
+					do
 					{
-						strcpy(Top[i+z].nimi, Top[i+(z + 1)].nimi);
-						Top[i + z].k_maara = Top[i+(z + 1)].k_maara;
-						Top[i + z].o_vastaus = Top[i+(z + 1)].o_vastaus;
-						Top[i + z].prossa = Top[i+(z + 1)].prossa;
-						z++;
-					}
+						for (k = (10 - i); k > 0; k--) //laita välimuuttuja
+						{
+							strcpy(Top[i + z].nimi, Top[i + (z + 1)].nimi);
+							Top[i + z].k_maara = Top[i + (z + 1)].k_maara;
+							Top[i + z].o_vastaus = Top[i + (z + 1)].o_vastaus;
+							Top[i + z].prossa = Top[i + (z + 1)].prossa;
+							z++;
+						}
+						strcpy(Top[i].nimi, Nyk.nimi);
+						Top[i].k_maara = Nyk.k_maara;
+						Top[i].o_vastaus = Nyk.o_vastaus;
+						Top[i].prossa = Nyk.prossa;
 
-					strcpy(Top[i].nimi, Nyk.nimi);
-					Top[i].k_maara = Nyk.k_maara;
-					Top[i].o_vastaus = Nyk.o_vastaus;
-					Top[i].prossa = Nyk.prossa;
-				
-					tarkastus + 1;
+						tarkastus++;
+					} while (tarkastus == 0);
 				}
 				else
 				{
 				}
 			}
-		} while (tarkastus == 0);
-	
-		taulu = fopen("perus", "w");
-	
-		for (i = 0; i < 10; i++)
+		} while (tarkastus == 0 && i != 10);
+
+		
+
+		if (tarkastus == 1)
 		{
-			fprintf(taulu, "%s, %d, %d, %.f\n", Top[i].nimi, Top[i].k_maara, Top[i].o_vastaus, Top[i].prossa)
+			for (z = 0; z < 1; z++)
+			{
+				taulu = fopen("perus", "w");
+
+				for (i = 0; i < 10; i++)
+				{
+					fprintf(taulu, "%s, %d, %d, %.f\n", Top[i].nimi, Top[i].k_maara, Top[i].o_vastaus, Top[i].prossa);
+				}
+
+				fclose(taulu);
+				printf("Pisteesi on %d / %d\n", pisteet, kysymysmaara - 1);
+				printf("Pääsit parhaimmiston joukkoon!!! Onneksi olkoon!\n");
+				system("PAUSE");
+			}
+		}
+
+		else if (tarkastus == 0 && i == 10)
+		{
 			printf("Pisteesi on %d / %d\n", pisteet, kysymysmaara - 1);
+			printf("Valitettavasti pisteesi eivat riita tilastoille paasemiseksi. :(\n");
+			printf("Parempi onni ensi kerralla!!\n");
 			system("PAUSE");
 		}
 	}
-	printf("Pisteesi on %d / %d\n", pisteet, kysymysmaara - 1);
-	printf("Vastasit alle %d, joten pisteitäsi ei tallenneta", kysymysmaara - 1);
-	system("PAUSE");
+
+	else if (kysymysmaara < 10)
+	{
+		printf("Pisteesi on %d / %d\n", pisteet, kysymysmaara - 1);
+		printf("Vastasit alle 10:neen kysymykseen, joten pisteitäsi ei tallenneta\n");
+		system("PAUSE");
+	}
+	else
+	{
+		printf("tapahtui jotain kummaa");
+	}
 }
 
 
