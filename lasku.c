@@ -1136,49 +1136,53 @@ void peruskoulu(void)
 			kysymysmaara++;
 		}
 	} while (vastaus != -100);
-
-	Nyk.k_maara = kysymysmaara - 1;
-	Nyk.o_vastaus = pisteet;
-	Nyk.prossa = (pisteet / (kysymysmaara - 1));
-
-	do
+	
+	if (kysymysmaara > 9)
 	{
+		Nyk.k_maara = kysymysmaara - 1;
+		Nyk.o_vastaus = pisteet;
+		Nyk.prossa = (pisteet / (kysymysmaara - 1));
+
+		do
+		{
+			for (i = 0; i < 10; i++)
+			{
+				if (Nyk.prossa > Top[i].prossa)
+				{
+					for (k = (10 - i); k < 0; k--)
+					{
+						strcpy(Top[i+z].nimi, Top[i+(z + 1)].nimi);
+						Top[i + z].k_maara = Top[i+(z + 1)].k_maara;
+						Top[i + z].o_vastaus = Top[i+(z + 1)].o_vastaus;
+						Top[i + z].prossa = Top[i+(z + 1)].prossa;
+						z++;
+					}
+
+					strcpy(Top[i].nimi, Nyk.nimi);
+					Top[i].k_maara = Nyk.k_maara;
+					Top[i].o_vastaus = Nyk.o_vastaus;
+					Top[i].prossa = Nyk.prossa;
+				
+					tarkastus + 1;
+				}
+				else
+				{
+				}
+			}
+		} while (tarkastus == 0);
+	
+		taulu = fopen("perus", "w");
+	
 		for (i = 0; i < 10; i++)
 		{
-			if (Nyk.prossa > Top[i].prossa)
-			{
-				for (k = (10 - i); k < 0; k--)
-				{
-					strcpy(Top[i+z].nimi, Top[i+(z + 1)].nimi);
-					Top[i + z].k_maara = Top[i+(z + 1)].k_maara;
-					Top[i + z].o_vastaus = Top[i+(z + 1)].o_vastaus;
-					Top[i + z].prossa = Top[i+(z + 1)].prossa;
-					z++;
-				}
-
-				strcpy(Top[i].nimi, Nyk.nimi);
-				Top[i].k_maara = Nyk.k_maara;
-				Top[i].o_vastaus = Nyk.o_vastaus;
-				Top[i].prossa = Nyk.prossa;
-				
-				tarkastus + 1;
-			}
-			else
-			{
-			}
+			fprintf(taulu, "%s, %d, %d, %.f\n", Top[i].nimi, Top[i].k_maara, Top[i].o_vastaus, Top[i].prossa)
+			printf("Pisteesi on %d / %d\n", pisteet, kysymysmaara - 1);
+			system("PAUSE");
 		}
-	} while (tarkastus == 0);
-
-	taulu = fopen("perus", "w");
-	
-	for (i = 0; i < 10; i++)
-	{
-		fprintf(taulu, "%s, %d, %d, %.f\n", Top[i].nimi, Top[i].k_maara, Top[i].o_vastaus, Top[i].prossa);
 	}
-
 	printf("Pisteesi on %d / %d\n", pisteet, kysymysmaara - 1);
-
-	system("pause");
+	printf("Vastasit alle %d, joten pisteitäsi ei tallenneta", kysymysmaara - 1);
+	system("PAUSE");
 }
 
 
