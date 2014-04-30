@@ -1,0 +1,159 @@
+Laskuharjoitus
+
+LISÄTÄÄN TIEDOSTO HÄRDELLI VASTA LOPUKSI KU MUUT JUTUT TOIMII JA KEKSITÄÄN KAIKKEA MUUTA KIVAA
+
+Funktiot erilliseen tiedostoon? Paljon selkeämpi mallia #include “funktiot.h”, joka on tiedosto mikä sisältää funktiot.
+
+Menu (main)
+
+    - Aloita peli
+
+        - kysyy pelaajan nimen
+
+        - kysyy vaikeusasteen
+
+            - helppo (plus ja miinus 0-100 välillä) --->> nakkaa funktioon
+
+            - keskivaikea (plus ja miinus sekä kerto ja jako 0-10) -->> nakkaa funktioon
+
+            - vaikea ( kaikkea 0-10 välillä) --->> nakkaa funktioon
+
+    - Ohje --->> nakkaa funktioon (void ohje)
+
+    - Antaa yleisen ohjeen pelin tarkoituksesta
+
+    - Kysyy haluaako pelaaja lukea teoriaa jostakin laskutoimituksesta
+
+        - 1. Summa (void summaTeoria)
+
+        - 2. Erotus (void erotusTeoria)
+
+        - 3. Tulo (void tuloTeoria)
+
+        - 4. Osamäärä (void osamaaraTeoria)
+
+        - Mahdolliset harjoitustehtävät?        (tehty)
+
+    - Tulosta tulokset näytölle (void tuloste)
+
+        - tulostaa vastaus tiedoston näytölle kokonaan
+
+    - Lopeta
+
+TIEDOSTO MUOTO
+
+    - kysymysten määrä, kysymykset litaniassa allekkain, pisteet/total.
+
+Helppo tehtävä (void helppo) (tehty)
+
+- kysyy monta kysymystä haluaa
+
+- avaa vastaus tiedoston “w”
+
+- randilla arpoo numeron 0-1 (plus tai miinus)
+
+    - if- kattoo kumpi tuli
+
+- arpoo ekan ja tokan numeron
+
+- tulostaa näytölle “3 + 3 = ?” ja odottaa vastausta
+
+- kertoo että oliko vastaus oikein tai väärin ja clearaa näytön 2s jälkeen ja antaa uuden
+
+- printtaa koko ajan tiedostoon jotta voi menussa katsoa tuloksiaan
+
+- sulkee tiedoston
+
+- tulostaa pisteet näytölle (tallentaa tiedostoon myös)
+
+Keskivaikea tehtävä (void keskitaso)(tehty)
+
+    - Kysymysten määrä?
+
+    - Avataan tiedosto “w”
+
+    - Arvotaan rand-funktiolla numero väliltä 0-3 (plus, miinus, kerto, jako)
+
+    - if-lauseella funktio
+
+    - Arvotaan funktiossa kaksi arvoa väliltä 0-10
+
+    - Tulostetaan näytölle lauseke
+
+    - Odotetaan vastaus ja kerrotaan onko se oikein vai väärin
+
+    - Tulostetaan tiedostoon kysymyksen numero sekä oikein tai väärin
+
+    - Odotetaan 2s, tulostetaan uusi kysymys niin kauan kuin < kysymysten määrä
+
+    - Suljetaan tiedosto
+
+    - Tulostetaan lopuksi pistemäärä
+
+Vaikea (void vaikea)(tehty)
+
+    - kysyy että monta kysymystä
+
+    - arpoo randilla 0-3
+
+    - pyytää täydentämään “3 * ? = 5”
+
+- kertoo että oliko vastaus oikein tai väärin ja clearaa näytön 2s jälkeen ja antaa uuden
+
+- printtaa koko ajan tiedostoon jotta voi menussa katsoa tuloksiaan
+
+- sulkee tiedoston
+
+- tulostaa pisteen näytölle (tallentaa tiedostoon myös)
+
+Näytölle tulostus (void tuloste) (tehty? jos ummartaa oikein)
+
+    - Tulostaa näytölle tilastot
+
+    - tulostaa nimen jonka perään tiedoston sisällön
+
+    - kysymysten määrä, kysymykset litaniassa allekkain, pisteet/total.
+
+FILE *<oma_tulos>
+
+    - Kysyy nickin funktion alussa (pitäisikö kysyä ennen pelin valintaa ja kutsua funktiota ko. nimellä?) emt
+
+    - printtaa joka kyssärin jälkeen laskun ja vastauksen
+
+    - loppuun tulos
+
+    FORMAT
+
+“Matti
+
+    X + X = ?
+
+    Vastauksesi: B joka on oikein/väärin
+
+…
+
+…
+
+Yhteispisteet XX/XX”
+
+----
+
+fprintf(“%s\n\n”, <nimi>);
+
+fprintf(“Kysymys %d/%d\n”, i, total);
+
+fprintf(“%d + %d = ?\n”, eka, toka);
+
+IF (O/V)
+
+fprintf(“vastauksesi oli %d ja se on väärin/oikein\n”, vastaus);
+
+fprintf(“pisteesi %d/%d”, pisteet, total);
+
+FILE *<HI_score>
+
+    - tallentaa nickin ja total pisteet
+
+    - eri voideille omat
+
+    - pitää muistissa top 50 (tee ARRAY ja järjestä perus 2 x for + if)
