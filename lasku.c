@@ -1282,6 +1282,7 @@ void peruskoulu(void) //peruskoululaisille sopivia laskuja
 				fflush(stdin);
 				getchar();
 			}
+			tulostaja(&kysymysmaara, &kysymysmaara, &x, &eka, &toka, &tulos, &vastaus, &pisteet);
 		}
 
 		else if (x == 1) //miinus lasku
@@ -1317,6 +1318,7 @@ void peruskoulu(void) //peruskoululaisille sopivia laskuja
 					getchar();
 				}
 				kysymysmaara++;
+				tulostaja(&i, &kysymysmaara, &x, &eka, &toka, &tulos, &vastaus, &pisteet);
 			}
 
 			else
@@ -1355,6 +1357,7 @@ void peruskoulu(void) //peruskoululaisille sopivia laskuja
 				getchar();
 			}
 			kysymysmaara++;
+			tulostaja(&i, &kysymysmaara, &x, &eka, &toka, &tulos, &vastaus, &pisteet);
 		}
 	} while (vastaus != -100); //kun saadaan -100 niin lopetetaan
 
