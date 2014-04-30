@@ -414,7 +414,7 @@ void keskivaikea(void)
 			}
 
 
-			jako_tulos = eka / toka;
+			jako_tulos = ((float)eka) / toka;
 			jako_tulos_kokonaisluku = jako_tulos + 0.5;
 
 			printf("Mika on seuraavan laskun tulos (pyorista kokonaislukuun):\n%d / %d = ?\n", eka, toka); //x kertomerkkina koska * saattaa aiheuttaa onglemia
@@ -686,7 +686,7 @@ void vaikea(void)
 			scanf("%d", &vastaus);
 
 
-			kerto_tulos = toka / eka;
+			kerto_tulos = ((float)toka) / eka;
 			kerto_tulos_kokonaisluku = kerto_tulos + 0.5;
 
 
@@ -746,7 +746,7 @@ void vaikea(void)
 				scanf("%d", &vastaus);
 
 
-				jako_tulos = eka / toka;
+				jako_tulos = ((float)eka) / toka;
 				jako_tulos_kokonaisluku = jako_tulos + 0.5;
 
 				if ((vastaus > jako_tulos - 1) && (vastaus < jako_tulos + 1))
