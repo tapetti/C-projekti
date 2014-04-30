@@ -1377,10 +1377,10 @@ void peruskoulu(void) //peruskoululaisille sopivia laskuja
 				{
 					for (k = i; k < 10; k++) //tämä kopioi kaikki loput yhden alaspäin
 						{
-							strcpy(Top[10-z].nimi, Top[10-z-1].nimi);
-							Top[10-z].k_maara = Top[10-z-1].k_maara;
-							Top[10-z].prossa = Top[10-z-1].prossa;
-							Top[10-z].o_vastaus = Top[10-z-1].o_vastaus;
+							strcpy(Top[9-z].nimi, Top[9-z-1].nimi);
+							Top[9-z].k_maara = Top[9-z-1].k_maara;
+							Top[9-z].prossa = Top[9-z-1].prossa;
+							Top[9-z].o_vastaus = Top[9-z-1].o_vastaus;
 							z++;
 						}
 						strcpy(Top[i].nimi, Nyk.nimi); // tässä kopioidaan pelaajan tilastot oikealle paikalle
