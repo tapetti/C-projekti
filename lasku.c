@@ -1540,16 +1540,16 @@ void tuloste (void)
 
 	char muuttuja;
 	
-    pTiedosto = fopen("perus.txt", "r");
+    pTiedosto = fopen("perus.txt", "r");		//Avataan tiedosto
 
 	printf("Nimi, kysymysmaara, oikeat pisteet, oikeellisuusprosentti\n\n");
 
-    while ((muuttuja = fgetc(pTiedosto)) != EOF)
+    while ((muuttuja = fgetc(pTiedosto)) != EOF)		//Merkki kerrallaan, kunnes tiedoston loppu
 	{
-		printf("%c", muuttuja);
+		printf("%c", muuttuja);		//Tulostetaan merkki kerrallaan
 	}
 
-    fclose (pTiedosto);
+    fclose (pTiedosto);		//Suljetaan tiedosto
 	system("pause");
 }
 
