@@ -2,12 +2,15 @@
 // C-projekti.pch will be the pre-compiled header
 // stdafx.obj will contain the pre-compiled type information
 
+
 #include "stdafx.h"
 #include "stdio.h"
 #include "string.h"
 #include "time.h"
 #include "stdlib.h"
+#include "math.h"
 #include <random>
+
 
 void helppo(void);
 void keskivaikea(void);
@@ -22,11 +25,14 @@ void tulostaja(int *pKysymyksenNumero, int *pKokonaismaara, int *pLaskutyyppi, i
 void nimi(char *pNimiTaulu);
 
 
+
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	int valintaValikko = 0;
 	char nimiTaulu[15];
 	char valintaTaso;
+
 
 	do
 	{
@@ -39,14 +45,18 @@ int _tmain(int argc, _TCHAR* argv[])
 		printf("4. Poistu pelista\n\n");
 		printf("© Janne Kari & Tarmo Merimaa (2014)\n");
 
+
 		fflush(stdin);
 		scanf("%d", &valintaValikko);
 
+
 		system("cls");
+
 
 		if (valintaValikko == 1)
 		{
 			printf("Anna nimesi:\n");
+
 
 			fflush(stdin);
 			while ((nimiTaulu[n] = getchar()) != '\n')
@@ -54,33 +64,41 @@ int _tmain(int argc, _TCHAR* argv[])
 				n++;
 			}
 
+
 			nimiTaulu[n] = '\0';
 			nimi(nimiTaulu);
 
+
 			printf("Helppo, keskivaikea, vaikea vai peruskoulutaso? (H, K, V, P)\n");
+
 
 			fflush(stdin);
 			scanf("%c", &valintaTaso);
+
 
 			if (valintaTaso == 'h' || valintaTaso == 'H')
 			{
 				helppo();
 			}
 
+
 			else if (valintaTaso == 'k' || valintaTaso == 'K')
 			{
 				keskivaikea();
 			}
+
 
 			else if (valintaTaso == 'v' || valintaTaso == 'V')
 			{
 				vaikea();
 			}
 
+
 			else if (valintaTaso == 'p' || valintaTaso == 'P')
 			{
 				peruskoulu();
 			}
+
 
 			else
 			{
@@ -89,10 +107,12 @@ int _tmain(int argc, _TCHAR* argv[])
 			}
 		}
 
+
 		else if (valintaValikko == 2)
 		{
 			ohjeet();
 		}
+
 
 		else if (valintaValikko == 3)
 		{
@@ -100,27 +120,37 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 	} while (valintaValikko != 4);
 
+
 	return 0;
 }
 
 
+
+
 void helppo(void)
+
 
 {
 	system("cls");
 
+
 	int kysymysMaara, i, x, pisteet = 0, eka, toka, tulos, vastaus;
+
 
 	srand(time(NULL));
 
+
 	printf("Monta kysymysta haluat etta sinulta kysytaan?\n");
+
 
 	fflush(stdin);
 	scanf("%d", &kysymysMaara);
 
+
 	for (i = 0; i < kysymysMaara; i++) //vetaa setin lapi niin monta kertaa ku kayttaja haluu
 	{
 		x = rand() % 2; //arpoo numeron valilla 0-1
+
 
 		if (x == 0) //plus lasku
 		{
@@ -128,9 +158,11 @@ void helppo(void)
 			toka = rand() % 20;
 			tulos = eka + toka;
 
+
 			printf("\n\nMika on seuraavan laskun tulos:\n%d + %d = ?\n", eka, toka);
 			fflush(stdin);
 			scanf("%d", &vastaus);
+
 
 			if (vastaus == tulos)
 			{
@@ -138,10 +170,12 @@ void helppo(void)
 				pisteet++; //oikea vastaus niin lisataan piste
 			}
 
+
 			else if (vastaus != tulos)
 			{
 				printf("\nvaarin\n\n\n");
 			}
+
 
 			else
 			{
@@ -150,20 +184,26 @@ void helppo(void)
 				getchar();
 			}
 
+
 			tulostaja(&i, &kysymysMaara, &x, &eka, &toka, &tulos, &vastaus, &pisteet);
 		}
+
 
 		else if (x == 1) //miinus lasku
 		{
 			eka = rand() % 20;
 			toka = rand() % 20;
 
+
 			tulos = eka - toka;
+
 
 			printf("Mika on seuraavan laskun tulos:\n%d - %d = ?\n", eka, toka);
 
+
 			fflush(stdin);
 			scanf("%d", &vastaus);
+
 
 			if (vastaus == tulos)
 			{
@@ -171,10 +211,12 @@ void helppo(void)
 				pisteet++; //oikea vastaus niin lisataan piste
 			}
 
+
 			else if (vastaus != tulos)
 			{
 				printf("\nvaarin\n\n\n");
 			}
+
 
 			else
 			{
@@ -183,8 +225,10 @@ void helppo(void)
 				getchar();
 			}
 
+
 			tulostaja(&i, &kysymysMaara, &x, &eka, &toka, &tulos, &vastaus, &pisteet);
 		}
+
 
 		else
 		{
@@ -194,9 +238,11 @@ void helppo(void)
 		}
 	}
 
+
 	printf("\n\nPisteesi on %d/%d\nPaina ENTER palataksesi menuun\n", pisteet, kysymysMaara);
 	system("PAUSE");
 }
+
 
 //sisaltaa seurvaat virhekoodit
 //keski_1
@@ -208,31 +254,41 @@ void keskivaikea(void)
 {
 	system("cls");
 
-	int kysymysMaara, i, x, pisteet = 0, eka, toka, tulos, vastaus;
+
+	int kysymysMaara, i, x, pisteet = 0, eka, toka, tulos, vastaus, jako_tulos_kokonaisluku;
 	float jako_tulos;
+
 
 	srand(time(NULL));
 
+
 	printf("Monta kysymysta haluat etta sinulta kysytaan?\n");
+
 
 	fflush(stdin);
 	scanf("%d", &kysymysMaara);
 
+
 	for (i = 0; i < kysymysMaara; i++) //vetaa setin lapi niin monta kertaa ku kayttaja haluu
 	{
 		x = rand() % 4; //arpoo numeron valilla 0-3
+
 
 		if (x == 0) //plus lasku
 		{
 			eka = rand() % 100;
 			toka = rand() % 100;
 
+
 			tulos = eka + toka;
+
 
 			printf("\n\nMika on seuraavan laskun tulos:\n%d + %d = ?\n", eka, toka);
 
+
 			fflush(stdin);
 			scanf("%d", &vastaus);
+
 
 			if (vastaus == tulos)
 			{
@@ -240,11 +296,14 @@ void keskivaikea(void)
 				pisteet++; //oikea vastaus niin lisataan piste
 			}
 
+
 			else if (vastaus != tulos)
 			{
 				printf("\nvaarin\n\n\n");
 
+
 			}
+
 
 			else
 			{
@@ -252,54 +311,69 @@ void keskivaikea(void)
 				getchar();
 			}
 
+
 			tulostaja(&i, &kysymysMaara, &x, &eka, &toka, &tulos, &vastaus, &pisteet);
 		}
+
 
 		else if (x == 1) //miinus lasku
 		{
 			eka = rand() % 100;
 			toka = rand() % 100;
 
+
 			tulos = eka - toka;
+
 
 			printf("Mika on seuraavan laskun tulos:\n%d - %d = ?\n", eka, toka);
 
+
 			fflush(stdin);
 			scanf("%d", &vastaus);
+
 
 			if (vastaus == tulos)
 			{
 				printf("\noikein\n\n\n");
 
+
 				pisteet++; //oikea vastaus niin lisataan piste
 			}
+
 
 			else if (vastaus != tulos)
 			{
 				printf("\nvaarin\n\n\n");
 			}
 
+
 			else
 			{
 				printf("tapahtui virhe! ((keski_3))\n paina ENTER"); //virhekoodi (keski_3)
+
 
 				fflush(stdin);
 				getchar();
 			}
 			tulostaja(&i, &kysymysMaara, &x, &eka, &toka, &tulos, &vastaus, &pisteet);
 		}
+
 
 		else if (x == 2) //kerto lasku
 		{
 			eka = rand() % 10;
 			toka = rand() % 10;
 
+
 			tulos = eka * toka;
+
 
 			printf("Mika on seuraavan laskun tulos:\n%d x %d = ?\n", eka, toka); //x kertomerkkina koska * saattaa aiheuttaa onglemia
 
+
 			fflush(stdin);
 			scanf("%d", &vastaus);
+
 
 			if (vastaus == tulos)
 			{
@@ -307,75 +381,94 @@ void keskivaikea(void)
 				pisteet++; //oikea vastaus niin lisataan piste
 			}
 
+
 			else if (vastaus != tulos)
 			{
 				printf("\nvaarin\n\n\n");
 			}
 
+
 			else
 			{
 				printf("tapahtui virhe! ((keski_4))\n paina ENTER"); //virhekoodi (keski_4)
+
 
 				fflush(stdin);
 				getchar();
 			}
 
+
 			tulostaja(&i, &kysymysMaara, &x, &eka, &toka, &tulos, &vastaus, &pisteet);
 		}
+
 
 		else if (x == 3) //jako lasku
 		{
 			eka = rand() % 100;
 			toka = rand() % 10;
 
+
 			while (toka == 0)
 			{
 				toka = rand() % 10;
 			}
 
+
 			jako_tulos = eka / toka;
+			jako_tulos_kokonaisluku = jako_tulos + 0.5;
 
 			printf("Mika on seuraavan laskun tulos (pyorista kokonaislukuun):\n%d / %d = ?\n", eka, toka); //x kertomerkkina koska * saattaa aiheuttaa onglemia
+
 
 			fflush(stdin);
 			scanf("%d", &vastaus);
 
-			if ((vastaus > jako_tulos - 1) && (vastaus < jako_tulos + 1))
+
+			if ((vastaus > jako_tulos_kokonaisluku - 1) && (vastaus < jako_tulos_kokonaisluku + 1))
 			{
 				printf("\noikein\n\n\n");
 				pisteet++; //oikea vastaus niin lisataan piste
 			}
 
-			else if (vastaus != jako_tulos)
+
+			else if (vastaus != jako_tulos_kokonaisluku)
 			{
 				printf("\nvaarin\n\n\n");
 			}
+
 
 			else
 			{
 				printf("tapahtui virhe! ((keski_5))\n paina ENTER"); //virhekoodi (keski_5)
 
+
 				fflush(stdin);
 				getchar();
 			}
 
-			tulostaja(&i, &kysymysMaara, &x, &eka, &toka, (int *)&jako_tulos, &vastaus, &pisteet);
+
+			tulostaja(&i, &kysymysMaara, &x, &eka, &toka, &jako_tulos_kokonaisluku, &vastaus, &pisteet);
 		}
+
 
 		else
 		{
 			printf("tapahtui virhe! ((keski_1))\n paina ENTER"); //virhekoodi (keski_1)
+
 
 			fflush(stdin);
 			getchar();
 		}
 	}
 
+
 	printf("\n\nPisteesi on %d/%d\nPaina ENTER palataksesi menuun", pisteet, kysymysMaara);
+
 
 	fflush(stdin);
 	getchar();
 }
+
 
 //sisaltaa seurvaat virhekoodit
 //vaikea_1
@@ -386,38 +479,52 @@ void keskivaikea(void)
 //vaikea_6
 //vaieka_7
 
+
 void vaikea(void)
 {
 
+
 	system("cls");
+
 
 	int kysymysMaara, i, x, pisteet = 0, eka, toka, tulos, vastaus;
 
-	int kerto_vastaus, jako_vastaus;
+	int kerto_vastaus, jako_vastaus, jako_tulos_kokonaisluku, kerto_tulos_kokonaisluku;
 	float jako_tulos, kerto_tulos;
+
 
 	srand(time(NULL));
 
+
 	printf("Monta kysymysta haluat etta sinulta kysytaan?\n");
+
 
 	fflush(stdin);
 	scanf("%d", &kysymysMaara);
 
+
 	for (i = 0; i < kysymysMaara; i++) //vetaa setin lapi niin monta kertaa ku kayttaja haluu
 	{
 		x = rand() % 4; //arpoo numeron valilla 0-3
+		x = 2;
 
 		if (x == 0) //plus lasku
 		{
+			x = 4;
+
 			eka = rand() % 100;
 			toka = rand() % 100;
 
+
 			printf("\n\nMika on seuraavan laskun tulos:\n%d + ? = %d\n", eka, toka);
+
 
 			fflush(stdin);
 			scanf("%d", &vastaus);
 
+
 			tulos = toka - eka;
+
 
 			if (vastaus == tulos)
 			{
@@ -425,37 +532,49 @@ void vaikea(void)
 				pisteet++; //oikea vastaus niin lisataan piste
 			}
 
+
 			else if (vastaus != tulos)
 			{
 				printf("\nvaarin\n\n\n");
 			}
 
+
 			else
 			{
 				printf("tapahtui virhe! ((vaikea_2))\n paina ENTER"); //virhekoodi (vaieka_2)
+
 
 				fflush(stdin);
 				getchar();
 			}
 
+
 			tulostaja(&i, &kysymysMaara, &x, &eka, &toka, &tulos, &vastaus, &pisteet);
 		}
+
 
 		else if (x == 1) //miinus lasku
 		{
 			x = rand() % 2; //arpoo etta kysytaanko vahentajaa vai vahennettavaa
 
+
 			if (x == 0) //kysyy vahentajaa
 			{
+				x = 5;
+
 				eka = rand() % 100;
 				toka = rand() % 100;
 
-				printf("Mika on seuraavan laskun tulos:\n%d - ? = %d", eka, toka);
+
+				printf("Mika on seuraavan laskun tulos:\n%d - ? = %d\n", eka, toka);
+
 
 				fflush(stdin);
 				scanf("%d", &vastaus);
 
-				tulos = toka - eka;
+
+				tulos = eka - toka;
+
 
 				if (vastaus == tulos)
 				{
@@ -463,37 +582,52 @@ void vaikea(void)
 					pisteet++; //oikea vastaus niin lisataan piste
 				}
 
+
 				else if (vastaus != tulos)
 				{
 					printf("\nvaarin\n\n\n");
 				}
+
 
 				else
 				{
 					printf("tapahtui virhe! ((vaikea_3))\n paina ENTER"); //virhekoodi (vaikea_3)
 
+
 					fflush(stdin);
 					getchar();
 				}
 
+
 				tulostaja(&i, &kysymysMaara, &x, &eka, &toka, &tulos, &vastaus, &pisteet);
 			}
 
+
 			else if (x == 1) //kysyy vahennettavaa
 			{
+				x = 6;
+
+				int vahennettava;
+
 				eka = rand() % 50;
 				toka = rand() % 100;
 
-				x = rand() % 40;
 
-				toka = toka - x;
+				vahennettava = rand() % 40;
 
-				printf("Mika on seuraavan laskun tulos:\n? - %d = %d", eka, toka);
+
+				toka = toka - vahennettava;
+
+
+				printf("Mika on seuraavan laskun tulos:\n? - %d = %d\n", eka, toka);
+
 
 				fflush(stdin);
 				scanf("%d", &vastaus);
 
+
 				tulos = toka + eka;
+
 
 				if (vastaus == tulos)
 				{
@@ -501,88 +635,119 @@ void vaikea(void)
 					pisteet++; //oikea vastaus niin lisataan piste
 				}
 
+
 				else if (vastaus != tulos)
 				{
 					printf("\nvaarin\n\n\n");
 				}
 
+
 				else
 				{
 					printf("tapahtui virhe! ((vaikea_6))\n paina ENTER"); //virhekoodi (vaikea_6)
+
 
 					fflush(stdin);
 					getchar();
 				}
 
-				tulostaja(&i, &kysymysMaara, &x, &eka, &toka, &tulos, &vastaus, &pisteet);
+
+					tulostaja(&i, &kysymysMaara, &x, &eka, &toka, &tulos, &vastaus, &pisteet);
 			}
 		}
 
+
 		else if (x == 2) //kerto lasku
 		{
+			x = 7;
+
 			eka = rand() % 10;
+
 
 			while (eka == 0)
 			{
 				eka = rand() % 10;
 			}
 
+
 			toka = rand() % 50;
+
 
 			while (toka < 10)
 			{
 				toka = rand() % 50;
 			}
 
+
 			printf("Mika on seuraavan laskun tulos:(pyorista kokonaislukuun)\n%d x ? = %d\n", eka, toka); //x kertomerkkina koska * saattaa aiheuttaa onglemia
+
 
 			fflush(stdin);
 			scanf("%d", &vastaus);
 
-			kerto_tulos = toka / eka + 0.5;
 
-			if ((vastaus < kerto_tulos + 1) && (vastaus > kerto_tulos - 1))
+			kerto_tulos = toka / eka;
+			kerto_tulos_kokonaisluku = kerto_tulos + 0.5;
+
+
+			if ((vastaus < kerto_tulos_kokonaisluku + 1) && (vastaus > kerto_tulos_kokonaisluku - 1))
 			{
 				printf("\noikein\n\n\n");
 				pisteet++; //oikea vastaus niin lisataan piste
 			}
 
-			else if (vastaus != kerto_tulos)
+
+			else if (vastaus != kerto_tulos_kokonaisluku)
 			{
 				printf("\nvaarin\n\n\n");
 			}
+
 
 			else
 			{
 				printf("tapahtui virhe! ((vaikea_4))\n paina ENTER"); //virhekoodi (vaikea_4)
 
+
 				fflush(stdin);
 				getchar();
 			}
 
-			tulostaja(&i, &kysymysMaara, &x, &eka, &toka, (int *)&kerto_tulos, &vastaus, &pisteet);
+			tulostaja(&i, &kysymysMaara, &x, &eka, &toka, &kerto_tulos_kokonaisluku, &vastaus, &pisteet);
 		}
+
 
 		else if (x == 3) //jako lasku
 		{
 			x = rand() % 2;
 
+
 			if (x == 0) //jakaja
 			{
+				x = 8;
+
 				eka = rand() % 100;
 				toka = rand() % 10;
+
 
 				while (eka < 10)
 				{
 					eka = rand() % 100;
 				}
 
+				while (toka == 0)
+				{
+					toka = rand() % 10;
+				}
+
 				printf("Mika on seuraavan laskun tulos (pyorista kokonaislukuun):\n%d / ? = %d\n", eka, toka);
+
 
 				fflush(stdin);
 				scanf("%d", &vastaus);
 
-				jako_tulos = vastaus * toka;
+
+				jako_tulos = eka / toka;
+				jako_tulos_kokonaisluku = jako_tulos + 0.5;
 
 				if ((vastaus > jako_tulos - 1) && (vastaus < jako_tulos + 1))
 				{
@@ -590,84 +755,113 @@ void vaikea(void)
 					pisteet++; //oikea vastaus niin lisataan piste
 				}
 
-				else if (vastaus != tulos)
+
+				else if (vastaus != jako_tulos)
 				{
 					printf("\nvaarin\n\n\n");
 				}
+
 
 				else
 				{
 					printf("tapahtui virhe! ((keski_5))\n paina ENTER"); //virhekoodi (keski_5)
 
+
 					fflush(stdin);
 					getchar();
 				}
 
-				tulostaja(&i, &kysymysMaara, &x, &eka, &toka, (int*)&jako_tulos, &vastaus, &pisteet);
+
+				tulostaja(&i, &kysymysMaara, &x, &eka, &toka, &jako_tulos_kokonaisluku, &vastaus, &pisteet);
 			}
 
-			else if (x == 0) //jakaja
+
+			else if (x == 1) //jakaja
 			{
+				x = 9;
+
+
 				eka = rand() % 10;
 				toka = rand() % 100;
+
+				while (eka == 0)
+				{
+					eka = rand() % 10;
+				}
 
 				while (toka < 10)
 				{
 					toka = rand() % 100;
 				}
+					
 
 				printf("Mika on seuraavan laskun tulos (pyorista kokonaislukuun):\n? / %d = %d\n", eka, toka);
+
 
 				fflush(stdin);
 				scanf("%d", &vastaus);
 
-				jako_tulos = eka * toka;
 
-				if ((vastaus > jako_tulos - 1) && (vastaus < jako_tulos + 1))
+				jako_tulos_kokonaisluku = eka * toka;
+
+
+				if ((vastaus > jako_tulos_kokonaisluku - 1) && (vastaus < jako_tulos_kokonaisluku + 1))
 				{
 					printf("\noikein\n\n\n");
 					pisteet++; //oikea vastaus niin lisataan piste
 				}
+
 
 				else if (vastaus != tulos)
 				{
 					printf("\nvaarin\n\n\n");
 				}
 
+
 				else
 				{
 					printf("tapahtui virhe! ((vaikea_5))\n paina ENTER"); //virhekoodi (vaikea_7)
+
 
 					fflush(stdin);
 					getchar();
 				}
 
-				tulostaja(&i, &kysymysMaara, &x, &eka, &toka, (int *)&jako_tulos, &vastaus, &pisteet);
+
+				tulostaja(&i, &kysymysMaara, &x, &eka, &toka, &jako_tulos_kokonaisluku, &vastaus, &pisteet);
 			}
 		}
+
 
 		else
 		{
 			printf("tapahtui virhe! ((vaikea_1))\n paina ENTER"); //virhekoodi (vaikea_1)
+
 
 			fflush(stdin);
 			getchar();
 		}
 	}
 
+
 	printf("\n\nPisteesi on %d/%d\nPaina ENTER palataksesi menuun", pisteet, kysymysMaara);
+
 
 	fflush(stdin);
 	getchar();
 }
 
 
+
+
 void ohjeet(void)
 {
 	system("cls");
 
+
 	char vastaus;
 	int teoriaVastaus;
+
 
 	printf("Pelin tarkoituksena on opettaa sen pelaajaa laskemaan erilaisia laskutoimituksia.\n");
 	printf("Peli sisaltaa kolme eri vaikeusastetta: helpon, keskivaikean seka vaikean.\n");
@@ -681,12 +875,15 @@ void ohjeet(void)
 	printf("Alun valikosta voit tarkistaa omat pistemaarasi aikaisempien pelien osalta.\n");
 	printf("Haluatko lukea teoriaa jostakin laskutoimituksesta? (k/e)\n");
 
+
 	fflush(stdin);
 	scanf("%c", &vastaus);
+
 
 	if (vastaus == 'k' || vastaus == 'K')
 	{
 		system("cls");
+
 
 		printf("Mista laskutoimituksesta haluaisit lisatietoa?\n");
 		printf("1. Summa eli pluslaskut\n");
@@ -694,58 +891,74 @@ void ohjeet(void)
 		printf("3. Tulo eli kertolaskut\n");
 		printf("4. Osamaara eli jakolaskut\n");
 
+
 		fflush(stdin);
 		scanf("%d", &teoriaVastaus);
+
 
 		if (teoriaVastaus == 1)
 		{
 			system("cls");
 
+
 			summaTeoria();
 		}
+
 
 		else if (teoriaVastaus == 2)
 		{
 			system("cls");
 
+
 			erotusTeoria();
 		}
+
 
 		else if (teoriaVastaus == 3)
 		{
 			system("cls");
 
+
 			tuloTeoria();
 		}
+
 
 		else if (teoriaVastaus == 4)
 		{
 			system("cls");
 
+
 			osamaaraTeoria();
 		}
+
 
 		else
 		{
 			printf("Valintaa kyseisella numerolla ei ole olemassa");
 
+
 			system("pause");
 		}
 	}
 
+
 	else
 	{
 		printf("Palataan valikkoon.");
+
 
 		system("pause");
 	}
 }
 
 
+
+
 void summaTeoria(void)
 {
 	char vastaus;
 	int harjVastaus;
+
 
 	printf("Summa- eli pluslaskuissa on tarkoituksena lisata yhteen kaksi tai useampi annettu arvo\n");
 	printf("Esimerkkina: Sinulla on kaksi omenaa. Saat viela kolme omenaa lisaa. Kuinka monta omenaa sinulla on yhteensa?\n\n");
@@ -756,10 +969,13 @@ void summaTeoria(void)
 	printf("Nain ollen vastaus kysymykseen on viisi omenaa\n");
 	printf("Haluatko tehda harjoitustehtavan? (k/e)\n");
 
+
 	fflush(stdin);
 	scanf("%c", &vastaus);
 
+
 	system("cls");
+
 
 	if (vastaus == 'k' || vastaus == 'K')
 	{
@@ -769,39 +985,50 @@ void summaTeoria(void)
 			printf("Sama numeroin: 2 + 1 = ?\n");
 			printf("Montako koiraa naet?\n");
 
+
 			fflush(stdin);
 			scanf("%d", &harjVastaus);
+
 
 			if (harjVastaus == 3)
 			{
 				printf("Vastauksesi %d oli oikein! Hyvin tehty!\n", harjVastaus);
 
+
 				system("pause");
 			}
+
 
 			else
 			{
 				printf("Vastauksesi %d oli vaarin. Yrita uudelleen!\n", harjVastaus);
 
+
 				system("pause");
 			}
+
 
 		} while (harjVastaus != 3);
 	}
 
+
 	else
 	{
 		printf("Palataan valikkoon.");
+
 
 		system("pause");
 	}
 }
 
 
+
+
 void erotusTeoria(void)
 {
 	char vastaus;
 	int harjVastaus;
+
 
 	printf("Erotus- eli miinuslaskun (tai vahennyslaskun) ideana on vahentaa ensimmaisena annetusta luvusta toinen annettu luku.\n");
 	printf("Esimerkiksi: Kolme varista istuu aidalla. Yksi lahtee pois. Kuinka monta varista jaa aidalle istumaan?\n\n");
@@ -813,10 +1040,13 @@ void erotusTeoria(void)
 	printf("Vastaus on siis kaksi varista\n");
 	printf("Haluatko harjoitustehtavan? (k/e)\n");
 
+
 	fflush(stdin);
 	scanf("%c", &vastaus);
 
+
 	system("cls");
+
 
 	if (vastaus == 'k' || vastaus == 'K')
 	{
@@ -826,38 +1056,48 @@ void erotusTeoria(void)
 			printf("Sama numeroin: 5 - 1 = ?\n");
 			printf("Montako norsua on viela jonossa?\n");
 
+
 			fflush(stdin);
 			scanf("%d", &harjVastaus);
+
 
 			if (harjVastaus == 4)
 			{
 				printf("Vastauksesi %d oli oikein! Hyvin tehty!\n", harjVastaus);
 
+
 				system("pause");
 			}
+
 
 			else
 			{
 				printf("Vastauksesi %d oli vaarin. Yrita uudeleen!\n", harjVastaus);
+
 
 				system("pause");
 			}
 		} while (harjVastaus != 4);
 	}
 
+
 	else
 	{
 		printf("Palataan valikkoon.");
+
 
 		system("pause");
 	}
 }
 
 
+
+
 void tuloTeoria(void)
 {
 	char vastaus;
 	int harjVastaus;
+
 
 	printf("Tulo- eli kertolaskun tarkoituksena on moninkertaistaa jokin luku.\n");
 	printf("Esimerkiksi luvun 3 kaksinkertaistaminen voitaisiin merkita 3 * 2 = 6.\n");
@@ -872,10 +1112,13 @@ void tuloTeoria(void)
 	printf("Nain ollen vastaukseksi saadaan kuusi (6) omenaa.\n");
 	printf("Haluatko harjoitustehtavan? (k/e)\n");
 
+
 	fflush(stdin);
 	scanf("%c", &vastaus);
 
+
 	system("cls");
+
 
 	if (vastaus == 'k' || vastaus == 'K')
 	{
@@ -885,39 +1128,49 @@ void tuloTeoria(void)
 			printf("Eli 3 * 2 = ?\n");
 			printf("Montako viilia jaakaapissa on?\n");
 
+
 			fflush(stdin);
 			scanf("%d", &harjVastaus);
+
 
 			if (harjVastaus == 6)
 			{
 				printf("Vastauksesi %d on oikein! Hyvin tehty!\n", harjVastaus);
 
+
 				system("pause");
 			}
+
 
 			else
 			{
 				printf("Vastauksesi %d on vaarin. Yrita uudelleen!\n", harjVastaus);
 				printf("(Vihje: Muuta laskutoimitus summamuotoon)\n");
 
+
 				system("pause");
 			}
 		} while (harjVastaus != 6);
 	}
 
+
 	else
 	{
 		printf("Palataan valikkoon.");
+
 
 		system("pause");
 	}
 }
 
 
+
+
 void osamaaraTeoria(void)
 {
 	char vastaus;
 	int harjVastaus;
+
 
 	printf("Osamaara- eli jakolaskun tarkoituksena on jakaa ensimmaisena annettu luku sita seuraavalla luvulla.\n");
 	printf("Esimerkiksi luvun kuusi (6) jakaminen kolmella (3) voitaisiin merkita 6 / 3 = 2.\n");
@@ -930,10 +1183,13 @@ void osamaaraTeoria(void)
 	printf("Nain ollen sinulle jaa kolme (3) karkkia eli 6/2 = 3.\n");
 	printf("Haluatko harjoitustehtavan? (k/e)\n");
 
+
 	fflush(stdin);
 	scanf("%c", &vastaus);
 
+
 	system("cls");
+
 
 	if (vastaus == 'k' || vastaus == 'K')
 	{
@@ -943,15 +1199,19 @@ void osamaaraTeoria(void)
 			printf("Eli 9 / 3 = ?\n");
 			printf("Kuinka paljon kukin heista saa rahaa?\n");
 
+
 			fflush(stdin);
 			scanf("%d", &harjVastaus);
+
 
 			if (harjVastaus == 3)
 			{
 				printf("Vastauksesi %d oli oikein! Hyvin tehty!\n", harjVastaus);
 
+
 				system("pause");
 			}
+
 
 			else
 			{
@@ -962,32 +1222,41 @@ void osamaaraTeoria(void)
 		} while (harjVastaus != 3);
 	}
 
+
 	else
 	{
 		printf("Palataan valikkoon.");
+
 
 		system("pause");
 	}
 }
 
 
+
+
 void peruskoulu(void)
 {
 	system("cls");
 
+
 	int i = 0, k, kysymysmaara = 0, x, eka, toka, tulos, vastaus = 0, nimi, tarkastus = 0, z = 1;
 	FILE *taulu, *pnimi;
 	float pisteet = 0;
+
 
 	//väliaikaiset
 	char v_nimi[20];
 	float v_fnumero;
 	int v_numero;
 
+
 	srand(time(NULL));
+
 
 	printf("Lopeta luvulla (-100)\n");
 	printf("Tilastoille paasemiseksi pitaa vastata vahintaan 10 kysymykseen.\n");
+
 
 	typedef struct {
 		char nimi[20];
@@ -996,8 +1265,10 @@ void peruskoulu(void)
 		float prossa;
 	}TOP;
 
+
 	TOP Top[10];
 	TOP Nyk;
+
 
 	for (i = 0; i < 10; i++) //pistetaulukon alustus
 	{
@@ -1007,11 +1278,14 @@ void peruskoulu(void)
 		Top[i].prossa = 0;
 	}
 
+
 	taulu = fopen("perus.txt", "r+");
+
 
 	if (taulu == NULL)
 	{
 		taulu = fopen("perus.txt", "w");
+
 
 		for (i = 0; i < 10; i++)
 		{
@@ -1027,27 +1301,35 @@ void peruskoulu(void)
 		}
 	}
 
+
 	pnimi = fopen("tulos.txt", "r");
 	fscanf(pnimi, "%s", &Nyk.nimi);
 	fclose(pnimi);
 
+
 	do
 	{
-		x = rand() % 3; //arpoo numeron valilla 0-1
+		x = rand() % 3; //arpoo numeron valilla 0-2
+
 
 		if (x == 0) //plus lasku
 		{
 			kysymysmaara++;
 
+
 			eka = rand() % 101;
 			toka = rand() % 101;
 
+
 			tulos = eka + toka;
+
 
 			printf("\n\nMika on seuraavan laskun tulos:\n%d + %d = ?\n", eka, toka);
 
+
 			fflush(stdin);
 			scanf("%d", &vastaus);
+
 
 			if (vastaus == tulos)
 			{
@@ -1055,33 +1337,41 @@ void peruskoulu(void)
 				pisteet++; //oikea vastaus niin lisataan piste
 			}
 
+
 			else if (vastaus != tulos)
 			{
 				printf("\nvaarin\n\n\n");
 			}
 
+
 			else
 			{
 				printf("tapahtui virhe! ((helppo_2))\n paina ENTER"); //virhekoodi (helppo_2)
+
 
 				fflush(stdin);
 				getchar();
 			}
 		}
 
+
 		else if (x == 1) //miinus lasku
 		{
 			eka = rand() % 101;
 			toka = rand() % 101;
 
+
 			tulos = eka - toka;
+
 
 			if (tulos >= 0)
 			{
 				printf("Mika on seuraavan laskun tulos:\n%d - %d = ?\n", eka, toka);
 
+
 				fflush(stdin);
 				scanf("%d", &vastaus);
+
 
 				if (vastaus == tulos)
 				{
@@ -1089,14 +1379,17 @@ void peruskoulu(void)
 					pisteet++; //oikea vastaus niin lisataan piste
 				}
 
+
 				else if (vastaus != tulos)
 				{
 					printf("\nvaarin\n\n\n");
 				}
 
+
 				else
 				{
 					printf("tapahtui virhe! ((helppo_2))\n paina ENTER"); //virhekoodi (helppo_3)
+
 
 					fflush(stdin);
 					getchar();
@@ -1104,22 +1397,28 @@ void peruskoulu(void)
 				kysymysmaara++;
 			}
 
+
 			else
 			{
 			}
 		}
+
 
 		else if (x == 2) //kerto lasku
 		{
 			eka = rand() % 11;
 			toka = rand() % 11;
 
+
 			tulos = eka * toka;
+
 
 			printf("Mika on seuraavan laskun tulos:\n%d x %d = ?\n", eka, toka); //x kertomerkkina koska * saattaa aiheuttaa onglemia
 
+
 			fflush(stdin);
 			scanf("%d", &vastaus);
+
 
 			if (vastaus == tulos)
 			{
@@ -1127,14 +1426,17 @@ void peruskoulu(void)
 				pisteet++; //oikea vastaus niin lisataan piste
 			}
 
+
 			else if (vastaus != tulos)
 			{
 				printf("\nvaarin\n\n\n");
 			}
 
+
 			else
 			{
 				printf("tapahtui virhe! ((vaikea_4))\n paina ENTER"); //virhekoodi (vaikea_4)
+
 
 				fflush(stdin);
 				getchar();
@@ -1143,11 +1445,13 @@ void peruskoulu(void)
 		}
 	} while (vastaus != -100);
 
+
 	if (kysymysmaara > 9)
 	{
 		Nyk.k_maara = kysymysmaara - 1;
 		Nyk.o_vastaus = pisteet;
 		Nyk.prossa = (pisteet / (kysymysmaara - 1));
+
 
 		do
 		{
@@ -1166,10 +1470,12 @@ void peruskoulu(void)
 						}
 						Top[i] = Nyk; //kokeilu että toimisiko tällei
 
+
 						//strcpy(Top[i].nimi, Nyk.nimi);
 						//Top[i].k_maara = Nyk.k_maara;
 						//Top[i].o_vastaus = Nyk.o_vastaus;
 						//Top[i].prossa = Nyk.prossa;
+
 
 						tarkastus++;
 					} while (tarkastus == 0);
@@ -1180,7 +1486,8 @@ void peruskoulu(void)
 			}
 		} while (tarkastus == 0 && i != 10);
 
-		
+
+
 
 		if (tarkastus == 1)
 		{
@@ -1188,10 +1495,12 @@ void peruskoulu(void)
 			{
 				taulu = fopen("perus", "w");
 
+
 				for (i = 0; i < 10; i++)
 				{
 					fprintf(taulu, "%s, %d, %d, %.f\n", Top[i].nimi, Top[i].k_maara, Top[i].o_vastaus, Top[i].prossa);
 				}
+
 
 				fclose(taulu);
 				printf("Pisteesi on %d / %d\n", pisteet, kysymysmaara - 1);
@@ -1199,6 +1508,7 @@ void peruskoulu(void)
 				system("PAUSE");
 			}
 		}
+
 
 		else if (tarkastus == 0 && i == 10)
 		{
@@ -1208,6 +1518,7 @@ void peruskoulu(void)
 			system("PAUSE");
 		}
 	}
+
 
 	else if (kysymysmaara < 10)
 	{
@@ -1222,51 +1533,97 @@ void peruskoulu(void)
 }
 
 
+
 void tulostaja(int *pKysymyksenNumero, int *pKokonaismaara, int *pLaskutyyppi, int *pEka, int *pToka, int *pOikeaVastaus, int *pAnnettuVastaus, int *pOikeatVastaukset)
 {
 
 	FILE *pTiedosto;
-
+	
 	pTiedosto = fopen("tulos.txt", "a+");
-
+	
 	if (pTiedosto != NULL)
 	{
+		
 		fprintf(pTiedosto, "Kysymys %d/%d\n", *pKysymyksenNumero + 1, *pKokonaismaara);
 
+		
 		if (*pLaskutyyppi == 0)
 		{
 			fprintf(pTiedosto, "%d + %d = ?\n", *pEka, *pToka);
 		}
 
+		
 		else if (*pLaskutyyppi == 1)
 		{
 			fprintf(pTiedosto, "%d - %d = ?\n", *pEka, *pToka);
 		}
 
+		
 		else if (*pLaskutyyppi == 2)
 		{
 			fprintf(pTiedosto, "%d * %d = ?\n", *pEka, *pToka);
 		}
+
 
 		else if (*pLaskutyyppi == 3)
 		{
 			fprintf(pTiedosto, "%d / %d = ?\n", *pEka, *pToka);
 		}
 
+
+		else if (*pLaskutyyppi == 4)
+		{
+			fprintf(pTiedosto, "%d + ? = %d\n", *pEka, *pToka);
+		}
+
+
+		else if (*pLaskutyyppi == 5)
+		{
+			fprintf(pTiedosto, "%d - ? = %d\n", *pEka, *pToka);
+		}
+
+
+		else if (*pLaskutyyppi == 6)
+		{
+			fprintf(pTiedosto, "? - %d = %d\n", *pEka, *pToka);
+		}
+
+
+		else if (*pLaskutyyppi == 7)
+		{
+			fprintf(pTiedosto, "%d * ? = %d\n", *pEka, *pToka);
+		}
+
+		
+		else if (*pLaskutyyppi == 8)
+		{
+			fprintf(pTiedosto, "%d / ? = %d\n", *pEka, *pToka);
+		}
+
+
+		else if (*pLaskutyyppi == 9)
+		{
+			fprintf(pTiedosto, "? / %d = %d\n", *pEka, *pToka);
+		}
+
+
 		else
 		{
 			printf("Tapahtui virhe\n");
 		}
+
 
 		if (*pAnnettuVastaus == *pOikeaVastaus)
 		{
 			fprintf(pTiedosto, "Antamasi vastaus oli %d. Vastaus oli oikein.\n\n", *pAnnettuVastaus);
 		}
 
+
 		else
 		{
 			fprintf(pTiedosto, "Antamasi vastaus oli %d. Vastaus oli vaarin.\n\n", *pAnnettuVastaus);
 		}
+
 
 		if (*pKysymyksenNumero + 1 == *pKokonaismaara)
 		{
@@ -1277,6 +1634,7 @@ void tulostaja(int *pKysymyksenNumero, int *pKokonaismaara, int *pLaskutyyppi, i
 }
 
 
+
 void nimi(char *pNimiTaulu)
 {
 	FILE *pTiedosto;
@@ -1284,6 +1642,6 @@ void nimi(char *pNimiTaulu)
 	pTiedosto = fopen("tulos.txt", "w");
 
 	fprintf(pTiedosto, "%s\n\n", pNimiTaulu);
-
+	
 	fclose(pTiedosto);
 }
