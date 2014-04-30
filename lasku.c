@@ -1634,6 +1634,32 @@ void tulostaja(int *pKysymyksenNumero, int *pKokonaismaara, int *pLaskutyyppi, i
 }
 
 
+void tuloste (void)
+{
+
+    FILE *pTilasto;
+
+    int i = 0;
+
+	char nimi[10];
+	int kysymysmaara, vastaus;
+	float oikeinProsentteina;
+	
+    pTilasto = fopen("perus.txt", "r");
+
+    while ( !EOF)
+    {
+        for ( i = 0; i < 20; i++)
+        {
+            fscanf(pTilasto, "%s %d %d %f", nimi, &kysymysmaara, &vastaus, &oikeinProsentteina);
+            printf("%s %d %d %.f\n", nimi, kysymysmaara, vastaus, oikeinProsentteina);
+        }
+    }
+
+    fclose (pTilasto);
+}
+
+
 
 void nimi(char *pNimiTaulu)
 {
