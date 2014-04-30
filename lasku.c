@@ -67,53 +67,51 @@ int _tmain(int argc, _TCHAR* argv[])
 			printf("Helppo, keskivaikea, vaikea vai peruskoulutaso? (H, K, V, P)\n");
 
 
-			fflush(stdin);		
-			scanf("%c", &valintaTaso);
+			fflush(stdin);		//Tyhjennetaan puskuri
+			scanf("%c", &valintaTaso); //Valinta
 
 
-			if (valintaTaso == 'h' || valintaTaso == 'H')
+			if (valintaTaso == 'h' || valintaTaso == 'H') //Jos helppo
 			{
-				helppo();
+				helppo(); //Kutsutaan helppo-funktitoa
 			}
 
 
-			else if (valintaTaso == 'k' || valintaTaso == 'K')
+			else if (valintaTaso == 'k' || valintaTaso == 'K') //Jos keskivaikea
 			{
-				keskivaikea();
+				keskivaikea(); //Kutsutaan keskivaikea-funktiota
 			}
 
 
-			else if (valintaTaso == 'v' || valintaTaso == 'V')
+			else if (valintaTaso == 'v' || valintaTaso == 'V') //Jos vaikea
 			{
-				vaikea();
+				vaikea(); //Kutsutaan vaikea-funktiota
 			}
 
 
-			else if (valintaTaso == 'p' || valintaTaso == 'P')
+			else if (valintaTaso == 'p' || valintaTaso == 'P') //Jos peruskoulu
 			{
-				peruskoulu();
+				peruskoulu(); //Kutsutaan peruskoulu-funktiota
 			}
 
 
-			else
+			else //Jos valinta on jotain muuta
 			{
 				printf("Valintasi oli virheellinen!");
 				system("PAUSE");
 			}
 		}
 
-
-		else if (valintaValikko == 2)
+		else if (valintaValikko == 2) //Jos valinta on 2
 		{
-			ohjeet();
+			ohjeet(); //Kutsutaan ohjeet-funktiota
 		}
 
-
-		else if (valintaValikko == 3)
+		else if (valintaValikko == 3) //Jos valinta on 3
 		{
 			//tallennus();
 		}
-	} while (valintaValikko != 4);
+	} while (valintaValikko != 4);	//Looppi jatkuu kunnes valinta on 4 (exit)
 
 
 	return 0;
