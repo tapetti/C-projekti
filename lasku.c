@@ -25,16 +25,13 @@ void tulostaja(int *pKysymyksenNumero, int *pKokonaismaara, int *pLaskutyyppi, i
 void nimi(char *pNimiTaulu);
 
 
-
-
 int _tmain(int argc, _TCHAR* argv[])
 {
 	int valintaValikko = 0;
 	char nimiTaulu[15];
 	char valintaTaso;
 
-
-	do
+	do  //Kunnes valinta on 4 (exit)
 	{
 		int n = 0;
 		system("cls");
@@ -46,33 +43,31 @@ int _tmain(int argc, _TCHAR* argv[])
 		printf("© Janne Kari & Tarmo Merimaa (2014)\n");
 
 
-		fflush(stdin);
-		scanf("%d", &valintaValikko);
+		fflush(stdin);			//Tyhjennetaan puskuri
+		scanf("%d", &valintaValikko); //Valinta
+
+		system("cls");		//Tyhjennetaan naytto
 
 
-		system("cls");
-
-
-		if (valintaValikko == 1)
+		if (valintaValikko == 1)  //Jos valinta on 1
 		{
 			printf("Anna nimesi:\n");
 
-
-			fflush(stdin);
-			while ((nimiTaulu[n] = getchar()) != '\n')
+			fflush(stdin);	//Puskurin tyhjennys
+			while ((nimiTaulu[n] = getchar()) != '\n')	//Nimen tallennus
 			{
 				n++;
 			}
 
 
-			nimiTaulu[n] = '\0';
-			nimi(nimiTaulu);
+			nimiTaulu[n] = '\0';	//NULL-termination getcharia varten
+			nimi(nimiTaulu);		//Kutsutaan funktiota
 
 
 			printf("Helppo, keskivaikea, vaikea vai peruskoulutaso? (H, K, V, P)\n");
 
 
-			fflush(stdin);
+			fflush(stdin);		
 			scanf("%c", &valintaTaso);
 
 
@@ -856,12 +851,10 @@ void vaikea(void)
 
 void ohjeet(void)
 {
-	system("cls");
-
+	system("cls");		//Tyhjennetaan naytto
 
 	char vastaus;
 	int teoriaVastaus;
-
 
 	printf("Pelin tarkoituksena on opettaa sen pelaajaa laskemaan erilaisia laskutoimituksia.\n");
 	printf("Peli sisaltaa kolme eri vaikeusastetta: helpon, keskivaikean seka vaikean.\n");
@@ -876,13 +869,13 @@ void ohjeet(void)
 	printf("Haluatko lukea teoriaa jostakin laskutoimituksesta? (k/e)\n");
 
 
-	fflush(stdin);
-	scanf("%c", &vastaus);
+	fflush(stdin);		//Tyhjennetaan puskuri
+	scanf("%c", &vastaus);	//Otetaan vastaus
 
 
-	if (vastaus == 'k' || vastaus == 'K')
+	if (vastaus == 'k' || vastaus == 'K')		//Vastauksen ollessa kylla
 	{
-		system("cls");
+		system("cls");	//Tyhjennetaan naytto
 
 
 		printf("Mista laskutoimituksesta haluaisit lisatietoa?\n");
@@ -892,61 +885,49 @@ void ohjeet(void)
 		printf("4. Osamaara eli jakolaskut\n");
 
 
-		fflush(stdin);
-		scanf("%d", &teoriaVastaus);
+		fflush(stdin);		//Tyhjennetaan puskuri
+		scanf("%d", &teoriaVastaus);	//Otetaan vastaus
 
 
-		if (teoriaVastaus == 1)
+		if (teoriaVastaus == 1) //Jos vastaus 1
 		{
 			system("cls");
-
-
-			summaTeoria();
+			summaTeoria();	//Kutsutaan summaTeoria funktiota
 		}
 
 
-		else if (teoriaVastaus == 2)
+		else if (teoriaVastaus == 2) //Jos vastaus 2
 		{
 			system("cls");
-
-
-			erotusTeoria();
+			erotusTeoria();	//Kutsutaan erotusTeoria funktiota
 		}
 
 
-		else if (teoriaVastaus == 3)
+		else if (teoriaVastaus == 3) //Jos vastaus 3
 		{
 			system("cls");
-
-
-			tuloTeoria();
+			tuloTeoria(); //Kutsutaan tuloTeoria funktiota
 		}
 
 
-		else if (teoriaVastaus == 4)
+		else if (teoriaVastaus == 4) //Jos vastaus 4
 		{
 			system("cls");
-
-
-			osamaaraTeoria();
+			osamaaraTeoria(); //Kutsutaan osamaaraTeoria funktiota
 		}
 
 
-		else
+		else //Jos vastaus ei mikaan edella mainituista
 		{
 			printf("Valintaa kyseisella numerolla ei ole olemassa");
-
-
-			system("pause");
+			system("pause"); //Pysaytetaan ohjelma, kunnes painaa jotain nappainta
 		}
 	}
 
 
-	else
+	else // Jos vastaus ei mikaan neljasta
 	{
 		printf("Palataan valikkoon.");
-
-
 		system("pause");
 	}
 }
@@ -970,53 +951,45 @@ void summaTeoria(void)
 	printf("Haluatko tehda harjoitustehtavan? (k/e)\n");
 
 
-	fflush(stdin);
-	scanf("%c", &vastaus);
+	fflush(stdin);			//Tyhjennetaan puskuri
+	scanf("%c", &vastaus); //Otetaan vastaus
+
+	system("cls");		//Tyhjennetaan naytto
 
 
-	system("cls");
-
-
-	if (vastaus == 'k' || vastaus == 'K')
+	if (vastaus == 'k' || vastaus == 'K')	//Jos kylla
 	{
-		do
+		do //Kunnes vastaus on oikein
 		{
 			printf("Naet kaksi koiraa. Koirien joukkoon saapuu viela yksi koira.\n");
 			printf("Sama numeroin: 2 + 1 = ?\n");
 			printf("Montako koiraa naet?\n");
 
 
-			fflush(stdin);
-			scanf("%d", &harjVastaus);
+			fflush(stdin); //tyhjennetaan puskuri
+			scanf("%d", &harjVastaus); //Otetaan vastaus
 
 
-			if (harjVastaus == 3)
+			if (harjVastaus == 3) //Jos vastaus on oikein
 			{
 				printf("Vastauksesi %d oli oikein! Hyvin tehty!\n", harjVastaus);
-
-
 				system("pause");
 			}
 
-
-			else
+			else //Jos vastaus on vaarin
 			{
 				printf("Vastauksesi %d oli vaarin. Yrita uudelleen!\n", harjVastaus);
-
-
 				system("pause");
 			}
 
 
-		} while (harjVastaus != 3);
+		} while (harjVastaus != 3); //Looppi pyorii kunnes vastaus on oikein
 	}
 
 
-	else
+	else //Jos jotain muuta kuin k(ylla)
 	{
-		printf("Palataan valikkoon.");
-
-
+		printf("Palataan valikkoon."); //Palataan valikkoon, reaktio nappainta painamalla
 		system("pause");
 	}
 }
@@ -1041,14 +1014,13 @@ void erotusTeoria(void)
 	printf("Haluatko harjoitustehtavan? (k/e)\n");
 
 
-	fflush(stdin);
-	scanf("%c", &vastaus);
+	fflush(stdin);		//Tyhjennetaan puskuri
+	scanf("%c", &vastaus);		//Otetaan vastaus
+
+	system("cls");	//Tyhjennetaan naytto
 
 
-	system("cls");
-
-
-	if (vastaus == 'k' || vastaus == 'K')
+	if (vastaus == 'k' || vastaus == 'K')	//Jos kylla
 	{
 		do
 		{
@@ -1056,36 +1028,29 @@ void erotusTeoria(void)
 			printf("Sama numeroin: 5 - 1 = ?\n");
 			printf("Montako norsua on viela jonossa?\n");
 
+			fflush(stdin);			//Tyhjennetaan puskuri
+			scanf("%d", &harjVastaus);		//Vastaus
 
-			fflush(stdin);
-			scanf("%d", &harjVastaus);
 
-
-			if (harjVastaus == 4)
+			if (harjVastaus == 4) //Jos vastaus on oikein
 			{
 				printf("Vastauksesi %d oli oikein! Hyvin tehty!\n", harjVastaus);
-
-
 				system("pause");
 			}
 
 
-			else
+			else  //Jos vastaus on vaarin
 			{
 				printf("Vastauksesi %d oli vaarin. Yrita uudeleen!\n", harjVastaus);
-
-
 				system("pause");
 			}
-		} while (harjVastaus != 4);
+		} while (harjVastaus != 4); //Looppi jatkuu kunnes vastataan oikein
 	}
 
 
-	else
+	else //Jos jotain muuta kuin k(ylla)
 	{
 		printf("Palataan valikkoon.");
-
-
 		system("pause");
 	}
 }
@@ -1113,52 +1078,42 @@ void tuloTeoria(void)
 	printf("Haluatko harjoitustehtavan? (k/e)\n");
 
 
-	fflush(stdin);
-	scanf("%c", &vastaus);
-
-
-	system("cls");
-
-
-	if (vastaus == 'k' || vastaus == 'K')
+	fflush(stdin);			//Tyhjennetaan puskuri
+	scanf("%c", &vastaus);	//Vastaus
+	
+	system("cls");		//Tyhjennetaan naytto
+	
+	if (vastaus == 'k' || vastaus == 'K')	//Jos kylla
 	{
-		do
+		do //Kunnes vastaus on oikein
 		{
 			printf("Jaakaapissa on kolme viilia. Kun katsot jaakaappiin uudelleen, huomaat, etta viilien maara on kaksinkertaistunut.\n");
 			printf("Eli 3 * 2 = ?\n");
 			printf("Montako viilia jaakaapissa on?\n");
 
+			fflush(stdin);				//Tyhjennetaan puskuri
+			scanf("%d", &harjVastaus);	//Vastaus
 
-			fflush(stdin);
-			scanf("%d", &harjVastaus);
 
-
-			if (harjVastaus == 6)
+			if (harjVastaus == 6)		//Jos oikein
 			{
 				printf("Vastauksesi %d on oikein! Hyvin tehty!\n", harjVastaus);
-
-
 				system("pause");
 			}
 
-
-			else
+			else //Muussa tapauksessa
 			{
 				printf("Vastauksesi %d on vaarin. Yrita uudelleen!\n", harjVastaus);
 				printf("(Vihje: Muuta laskutoimitus summamuotoon)\n");
-
-
 				system("pause");
 			}
-		} while (harjVastaus != 6);
+		} while (harjVastaus != 6);		//Looppi jatkuu, kunnes vastaus on oikein
 	}
 
 
-	else
+	else //Jos ei halua harjoituskysymysta
 	{
 		printf("Palataan valikkoon.");
-
-
 		system("pause");
 	}
 }
@@ -1184,14 +1139,13 @@ void osamaaraTeoria(void)
 	printf("Haluatko harjoitustehtavan? (k/e)\n");
 
 
-	fflush(stdin);
-	scanf("%c", &vastaus);
+	fflush(stdin);			//Tyhjennetaan puskuri
+	scanf("%c", &vastaus);	//Vastaus
+
+	system("cls");		//Tyhjennetaan naytto
 
 
-	system("cls");
-
-
-	if (vastaus == 'k' || vastaus == 'K')
+	if (vastaus == 'k' || vastaus == 'K')	//Jos kylla
 	{
 		do
 		{
@@ -1199,35 +1153,30 @@ void osamaaraTeoria(void)
 			printf("Eli 9 / 3 = ?\n");
 			printf("Kuinka paljon kukin heista saa rahaa?\n");
 
+			fflush(stdin);			//Tyhjennetaan puskuri
+			scanf("%d", &harjVastaus);	//Vastaus
 
-			fflush(stdin);
-			scanf("%d", &harjVastaus);
 
-
-			if (harjVastaus == 3)
+			if (harjVastaus == 3)	//Jos vastaus on oikein
 			{
 				printf("Vastauksesi %d oli oikein! Hyvin tehty!\n", harjVastaus);
-
-
 				system("pause");
 			}
 
 
-			else
+			else  //Jos vastaus on vaarin
 			{
 				printf("Vastauksesi %d oli vaarin. Yrita uudelleen!\n", harjVastaus);
 				printf("(Vihje: Monellako luku kolme (henkiloiden lukumaara) pitaa kertoa, jotta rahaa olisi yhteensa 9e)\n");
 				system("pause");
 			}
-		} while (harjVastaus != 3);
+		} while (harjVastaus != 3); //Looppi jatkuu kunnes vastaus on oikein
 	}
 
 
-	else
+	else //Jos ei halua kysymyksia
 	{
 		printf("Palataan valikkoon.");
-
-
 		system("pause");
 	}
 }
@@ -1537,71 +1486,71 @@ void peruskoulu(void)
 void tulostaja(int *pKysymyksenNumero, int *pKokonaismaara, int *pLaskutyyppi, int *pEka, int *pToka, int *pOikeaVastaus, int *pAnnettuVastaus, int *pOikeatVastaukset)
 {
 
-	FILE *pTiedosto;
+	FILE *pTiedosto;		//Osoitin tiedostoon
 	
-	pTiedosto = fopen("tulos.txt", "a+");
+	pTiedosto = fopen("tulos.txt", "a+");	//Avataan tiedosto lisäystä varten (append)
 	
-	if (pTiedosto != NULL)
+	if (pTiedosto != NULL)	//Jos tiedoston avaaminen onnistuu
 	{
 		
 		fprintf(pTiedosto, "Kysymys %d/%d\n", *pKysymyksenNumero + 1, *pKokonaismaara);
-
+		//Tulostetaan kysymyksen numero
 		
-		if (*pLaskutyyppi == 0)
+		if (*pLaskutyyppi == 0)	//Normaalit pluslaskut
 		{
 			fprintf(pTiedosto, "%d + %d = ?\n", *pEka, *pToka);
 		}
 
 		
-		else if (*pLaskutyyppi == 1)
+		else if (*pLaskutyyppi == 1) //Normaali miinus
 		{
 			fprintf(pTiedosto, "%d - %d = ?\n", *pEka, *pToka);
 		}
 
 		
-		else if (*pLaskutyyppi == 2)
+		else if (*pLaskutyyppi == 2) //Normaali kerto
 		{
 			fprintf(pTiedosto, "%d * %d = ?\n", *pEka, *pToka);
 		}
 
 
-		else if (*pLaskutyyppi == 3)
+		else if (*pLaskutyyppi == 3) //Normaali jako
 		{
 			fprintf(pTiedosto, "%d / %d = ?\n", *pEka, *pToka);
 		}
 
 
-		else if (*pLaskutyyppi == 4)
+		else if (*pLaskutyyppi == 4) //Vaikea plus
 		{
 			fprintf(pTiedosto, "%d + ? = %d\n", *pEka, *pToka);
 		}
 
 
-		else if (*pLaskutyyppi == 5)
+		else if (*pLaskutyyppi == 5) //Vaikea miinus #1
 		{
 			fprintf(pTiedosto, "%d - ? = %d\n", *pEka, *pToka);
 		}
 
 
-		else if (*pLaskutyyppi == 6)
+		else if (*pLaskutyyppi == 6) //Vaikea miinus #2
 		{
 			fprintf(pTiedosto, "? - %d = %d\n", *pEka, *pToka);
 		}
 
 
-		else if (*pLaskutyyppi == 7)
+		else if (*pLaskutyyppi == 7) //Vaikea kerto
 		{
 			fprintf(pTiedosto, "%d * ? = %d\n", *pEka, *pToka);
 		}
 
 		
-		else if (*pLaskutyyppi == 8)
+		else if (*pLaskutyyppi == 8) //Vaikea jako #1
 		{
 			fprintf(pTiedosto, "%d / ? = %d\n", *pEka, *pToka);
 		}
 
 
-		else if (*pLaskutyyppi == 9)
+		else if (*pLaskutyyppi == 9) //Vaikea jako #2
 		{
 			fprintf(pTiedosto, "? / %d = %d\n", *pEka, *pToka);
 		}
@@ -1613,23 +1562,23 @@ void tulostaja(int *pKysymyksenNumero, int *pKokonaismaara, int *pLaskutyyppi, i
 		}
 
 
-		if (*pAnnettuVastaus == *pOikeaVastaus)
+		if (*pAnnettuVastaus == *pOikeaVastaus) //Jos vastaus on oikein, tulostetaan se tiedostoon
 		{
 			fprintf(pTiedosto, "Antamasi vastaus oli %d. Vastaus oli oikein.\n\n", *pAnnettuVastaus);
 		}
 
 
-		else
+		else  //Muuten tulostetaan vaarin
 		{
 			fprintf(pTiedosto, "Antamasi vastaus oli %d. Vastaus oli vaarin.\n\n", *pAnnettuVastaus);
 		}
 
 
-		if (*pKysymyksenNumero + 1 == *pKokonaismaara)
+		if (*pKysymyksenNumero + 1 == *pKokonaismaara) //Jos kysymysmaara tulee tayteen
 		{
 			fprintf(pTiedosto, "Oikeita vastauksia oli %d kokonaismaarasta %d", *pOikeatVastaukset, *pKokonaismaara);
 		}
-		fclose(pTiedosto);
+		fclose(pTiedosto);		//Suljetaan tiedosto
 	}
 }
 
@@ -1637,19 +1586,19 @@ void tulostaja(int *pKysymyksenNumero, int *pKokonaismaara, int *pLaskutyyppi, i
 void tuloste (void)
 {
 
-    FILE *pTilasto;
+    FILE *pTilasto;		//osoitin tiedostoon
 
-    int i = 0;
+    int i = 0;			//indeksi looppia varten
 
-	char nimi[10];
-	int kysymysmaara, vastaus;
-	float oikeinProsentteina;
+	char nimi[20];		//Tiedostosta saatava nimi
+	int kysymysmaara, vastaus; //Kysymysmaara ja vastaus
+	float oikeinProsentteina;	//Oikeiden vastausten maara prosentteina
 	
     pTilasto = fopen("perus.txt", "r");
 
     while ( !EOF)
     {
-        for ( i = 0; i < 20; i++)
+        for ( i = 0; i < 20; i++) //Kopioidaan muuttujiin arvot ja tulostetaan ne
         {
             fscanf(pTilasto, "%s %d %d %f", nimi, &kysymysmaara, &vastaus, &oikeinProsentteina);
             printf("%s %d %d %.f\n", nimi, kysymysmaara, vastaus, oikeinProsentteina);
@@ -1663,11 +1612,11 @@ void tuloste (void)
 
 void nimi(char *pNimiTaulu)
 {
-	FILE *pTiedosto;
+	FILE *pTiedosto;		//Osoitin tiedostoon, avataan se
 
-	pTiedosto = fopen("tulos.txt", "w");
+	pTiedosto = fopen("tulos.txt", "w");	//Write, jotta aiemmat tulokset poistuisivat
 
-	fprintf(pTiedosto, "%s\n\n", pNimiTaulu);
+	fprintf(pTiedosto, "%s\n\n", pNimiTaulu);	//Tulostetaan nimi tiedostoon
 	
 	fclose(pTiedosto);
 }
