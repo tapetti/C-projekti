@@ -1184,32 +1184,27 @@ void osamaaraTeoria(void)
 
 
 
-void peruskoulu(void)
+void peruskoulu(void) //peruskoululaisille sopivia laskuja
 {
 	system("cls");
 
-	int i = 0, k, pisteet=0, kysymysmaara = 0, x, eka, toka, tulos, vastaus = 0, nimi, tarkastus = 0, z = 0;
-	FILE *taulu, *pnimi;
+	int i = 0, k, pisteet=0, kysymysmaara = 0, x, eka, toka, tulos, vastaus = 0, nimi, tarkastus = 0, z = 0; //alustetaan kaikki tarvittavat
+	FILE *taulu, *pnimi; //pari filu pointteria
 
-	//väliaikaiset
-	char v_nimi[20];
-	float v_fnumero;
-	int v_numero;
-
-	srand(time(NULL));
+	srand(time(NULL)); //randomin alustus
 
 	printf("Lopeta luvulla (-100)\n");
-	printf("Tilastoille paasemiseksi pitaa vastata vahintaan 10 kysymykseen.\n");
+	printf("Tilastoille paasemiseksi pitaa vastata vahintaan 10 kysymykseen.\n"); //vaaditaan minimi kysymysmäärä jotta vastaamalla yhteen ei pääse kärkeen
 
-	typedef struct {
+	typedef struct { //kaiken perusta eli käytettävä struktuuri
 		char nimi[20];
 		int k_maara;
 		int o_vastaus;
 		float prossa;
 	}TOP;
 
-	TOP Top[10];
-	TOP Nyk;
+	TOP Top[10]; //tehdään 10 tollasta koska tilastot pitää 10 yllä
+	TOP Nyk; // käytössä olevalle oma jotta voidaan verrata tilastoihin
 
 	for (i = 0; i < 10; i++) //pistetaulukon alustus
 	{
@@ -1219,9 +1214,9 @@ void peruskoulu(void)
 		Top[i].prossa = 0;
 	}
 
-	taulu = fopen("perus.txt", "r+");
+	taulu = fopen("perus.txt", "r"); //avataan tiedosto
 
-	if (taulu == NULL)
+	if (taulu == NULL) //jos ei ole olemassa niin tehdään 0% pohjustus
 	{
 		taulu = fopen("perus.txt", "w");
 
@@ -1231,20 +1226,19 @@ void peruskoulu(void)
 		}
 		fclose(taulu);
 	}
-	else
+	else //jos on olemassa niin luetaan muistiin nykyiset top pelaajat
 	{
-		taulu = fopen("perus.txt", "r");
 		for (i = 0; i < 10; i++)
 		{
 			fscanf(taulu, "%s %d %d %f", &Top[i].nimi, &Top[i].k_maara, &Top[i].o_vastaus, &Top[i].prossa);
 		}
 		fclose(taulu);
 	}
-	pnimi = fopen("tulos.txt", "r");
+	pnimi = fopen("tulos.txt", "r"); //haetaan nimi joka on tallennettu tiedostoon
 	fscanf(pnimi, "%s", &Nyk.nimi);
 	fclose(pnimi);
 
-	do
+	do //aloitetaan peli ja pelataan kunnes saadaan -100 luku käyttäjältä
 	{
 		x = rand() % 3; //arpoo numeron valilla 0-1
 
@@ -1354,10 +1348,11 @@ void peruskoulu(void)
 			}
 			kysymysmaara++;
 		}
-	} while (vastaus != -100);
+	} while (vastaus != -100); //kun saadaan -100 niin lopetetaan
 
-	if (kysymysmaara > 9)
+	if (kysymysmaara > 9) //vaaditaan vähintään 10 kysymystä jotta pääsisi tilastoille
 	{
+		//kopioidaan tulokset structuuriin josta niitä on helpompi käsitellä
 		Nyk.k_maara = kysymysmaara - 1;
 		Nyk.o_vastaus = pisteet;
 		Nyk.prossa = ((float)pisteet / (kysymysmaara - 1));
@@ -1365,11 +1360,11 @@ void peruskoulu(void)
 
 		do //alkaa käymään läpi taulukkoa
 		{
-			for (i = 0; i < 10 && tarkastus == 0; i++)
+			for (i = 0; i < 10 && tarkastus == 0; i++) //tätä toistetaan joko 10 kertaa jolloin kaikki on käyty läpi tai kun on sijoitettu top listaan
 			{
-				if (Nyk.prossa > Top[i].prossa)
+				if (Nyk.prossa > Top[i].prossa) //vertailu
 				{
-					for (k = i; k < 10; k++)
+					for (k = i; k < 10; k++) //tämä kopioi kaikki loput yhden alaspäin
 						{
 							strcpy(Top[10-z].nimi, Top[10-z-1].nimi);
 							Top[10-z].k_maara = Top[10-z-1].k_maara;
@@ -1377,34 +1372,36 @@ void peruskoulu(void)
 							Top[10-z].o_vastaus = Top[10-z-1].o_vastaus;
 							z++;
 						}
-						strcpy(Top[i].nimi, Nyk.nimi);
+						strcpy(Top[i].nimi, Nyk.nimi); // tässä kopioidaan pelaajan tilastot oikealle paikalle
 						Top[i].k_maara = Nyk.k_maara;
 						Top[i].o_vastaus = Nyk.o_vastaus;
 						Top[i].prossa = Nyk.prossa;
 
-						tarkastus++;
+						tarkastus++; //checksum kondikseen jotta ei jäädä loppiin
 				}
-				else
+				else //ihan vaan varmuudeksi varmistamassa virheiden varalta
 				{
 				}
 			}
-		} while (tarkastus == 0 && i != 10);
+		} while (tarkastus == 0 && i != 10); //joko pojot ei riittänyt tilastoihin tai sitten ollaan jo sijoitettu pelaaja top listaan
 
-		if (tarkastus == 1)
+		if (tarkastus == 1) //jos pelaaja pääsi top listaan niin tarkastus on 1 ja kerrotaan se hänelle
 		{
 				taulu = fopen("perus.txt", "w");
+				z = i + 1;
 				for (i = 0; i < 10; i++)
 				{
-					fprintf(taulu, "%s %d %d %.f\n", Top[i].nimi, Top[i].k_maara, Top[i].o_vastaus, Top[i].prossa);
+					fprintf(taulu, "%s %d %d %.f\n", Top[i].nimi, Top[i].k_maara, Top[i].o_vastaus, Top[i].prossa); //tallennetaan päivitetyt tilastot
 				}
 
 				fclose(taulu);
 				printf("Pisteesi on %d / %d\n", pisteet, kysymysmaara - 1);
 				printf("Paasit parhaimmiston joukkoon!!! Onneksi olkoon!\n");
+				printf("Olet %d paras pelaaja\n", z);
 				system("PAUSE");
 		}
 
-		else if (tarkastus == 0 && i == 10)
+		else if (tarkastus == 0 && i == 10) //taulukko käyty läpi ja pisteet ei riittänyt tilastoihin
 		{
 			printf("Pisteesi on %d / %d\n", pisteet, kysymysmaara - 1);
 			printf("Valitettavasti pisteesi eivat riita tilastoille paasemiseksi. :(\n");
@@ -1413,7 +1410,7 @@ void peruskoulu(void)
 		}
 	}
 
-	else if (kysymysmaara < 10)
+	else if (kysymysmaara < 10) //jos vastasi alle 10 kysymykseen
 	{
 		printf("Pisteesi on %d / %d\n", pisteet, kysymysmaara - 1);
 		printf("Vastasit alle 10:neen kysymykseen, joten pisteitasi ei tallenneta\n");
@@ -1421,9 +1418,9 @@ void peruskoulu(void)
 	}
 	else
 	{
-		printf("tapahtui jotain kummaa");
+		printf("tapahtui jotain kummaa"); //ihan vaan kaiken varalta
 	}
-	fflush(stdin);
+	fflush(stdin); //jotta ei kävisi mitään hassua
 }
 
 
