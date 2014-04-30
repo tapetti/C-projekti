@@ -1538,20 +1538,16 @@ void tuloste (void)
 
     int i = 0;			//indeksi looppia varten
 
-	char nimi[20];		//Tiedostosta saatava nimi
-	int kysymysmaara, vastaus; //Kysymysmaara ja vastaus
-	float oikeinProsentteina;	//Oikeiden vastausten maara prosentteina
+	char muuttuja;
 	
     pTiedosto = fopen("perus.txt", "r");
 
-    while ( !EOF)
-    {
-        for ( i = 0; i < 20; i++) //Kopioidaan muuttujiin arvot ja tulostetaan ne
-        {
-            fscanf(pTiedosto, "%s %d %d %f", nimi, &kysymysmaara, &vastaus, &oikeinProsentteina);
-            printf("%s %d %d %.f\n", nimi, kysymysmaara, vastaus, oikeinProsentteina);
-        }
-    }
+	printf("Nimi, kysymysmaara, oikeat pisteet, oikeellisuusprosentti\n\n");
+
+    while ((muuttuja = fgetc(pTiedosto)) != EOF)
+	{
+		printf("%c", muuttuja);
+	}
 
     fclose (pTiedosto);
 	system("pause");
