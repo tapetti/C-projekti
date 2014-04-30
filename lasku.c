@@ -854,15 +854,15 @@ void ohjeet(void)
 	char vastaus;
 	int teoriaVastaus;
 
-	printf("Pelin tarkoituksena on opettaa sen pelaajaa laskemaan erilaisia laskutoimituksia.\n");
+	printf("Pelin tarkoituksena on opettaa sen pelaajaa laskemaan erilaisia\nlaskutoimituksia.\n\n");
 	printf("Peli sisaltaa kolme eri vaikeusastetta: helpon, keskivaikean seka vaikean.\n");
 	printf("\tHelppo: plus- ja miinuslaskuja arvoilla valilta 0-100.\n");
-	printf("\tKeskivaikea: plus- ja miinuslaskut seka kerto- ja jakolaskut valilta 0-10.\n");
+	printf("\tKeskivaikea: plus- ja miinuslaskut seka kerto- ja jakolaskut\n\tvalilta 0-10.\n");
 	printf("\tVaikea: taydennystehtavia jokaisesta laskutoimituksesta valilta 0-10.\n\n");
 	printf("Aluksi peli kysyy pelaajan nimen seka kuinka monta kysymysta pelaaja haluaa.\n");
 	printf("Peli antaa aina yhden kysymyksen kerrallaan ja odottaa pelaajan vastausta.\n");
-	printf("Vastauksen jalkeen peli ilmoittaa, oliko vastaus oikein vai vaarin seka antaa seuraavan kysymyksen.\n");
-	printf("Kun pelaajan antama maara kysymyksia on kayty lapi, ilmoittaa peli oikeiden vastausten maaran.\n");
+	printf("Vastauksen jalkeen peli ilmoittaa, oliko vastaus oikein vai vaarin seka\nantaa seuraavan kysymyksen.\n");
+	printf("Kun pelaajan antama maara kysymyksia on kayty lapi, ilmoittaa peli oikeiden\nvastausten maaran.\n");
 	printf("Alun valikosta voit tarkistaa omat pistemaarasi aikaisempien pelien osalta.\n");
 	printf("Haluatko lukea teoriaa jostakin laskutoimituksesta? (k/e)\n");
 
@@ -925,7 +925,7 @@ void ohjeet(void)
 
 	else // Jos vastaus ei mikaan neljasta
 	{
-		printf("Palataan valikkoon.");
+		printf("Palataan valikkoon.\n");
 		system("pause");
 	}
 }
@@ -939,8 +939,8 @@ void summaTeoria(void)
 	int harjVastaus;
 
 
-	printf("Summa- eli pluslaskuissa on tarkoituksena lisata yhteen kaksi tai useampi annettu arvo\n");
-	printf("Esimerkkina: Sinulla on kaksi omenaa. Saat viela kolme omenaa lisaa. Kuinka monta omenaa sinulla on yhteensa?\n\n");
+	printf("Summa- eli pluslaskuissa on tarkoituksena lisata yhteen kaksi tai useampi\nannettu arvo.\n\n");
+	printf("Esimerkkina: Sinulla on kaksi omenaa. Saat viela kolme omenaa lisaa.\nKuinka monta omenaa sinulla on yhteensa?\n\n");
 	printf("Sama kysymys voidaan ilmaista luvuilla.\n");
 	printf("Kahteen omenaan (2) lisataan (+) kolme omenaa (3), joten niiden yhteismaara (=) on?\n");
 	printf("Nain ollen voidaan muodostaa lauseke: 2 + 3 = ?\n");
@@ -978,6 +978,7 @@ void summaTeoria(void)
 			{
 				printf("Vastauksesi %d oli vaarin. Yrita uudelleen!\n", harjVastaus);
 				system("pause");
+				system("cls");
 			}
 
 
@@ -987,7 +988,7 @@ void summaTeoria(void)
 
 	else //Jos jotain muuta kuin k(ylla)
 	{
-		printf("Palataan valikkoon."); //Palataan valikkoon, reaktio nappainta painamalla
+		printf("Palataan valikkoon.\n"); //Palataan valikkoon, reaktio nappainta painamalla
 		system("pause");
 	}
 }
@@ -1001,13 +1002,13 @@ void erotusTeoria(void)
 	int harjVastaus;
 
 
-	printf("Erotus- eli miinuslaskun (tai vahennyslaskun) ideana on vahentaa ensimmaisena annetusta luvusta toinen annettu luku.\n");
-	printf("Esimerkiksi: Kolme varista istuu aidalla. Yksi lahtee pois. Kuinka monta varista jaa aidalle istumaan?\n\n");
+	printf("Erotus- eli miinuslaskun (tai vahennyslaskun) ideana on vahentaa ensimmaisena\nannetusta luvusta toinen annettu luku.\n\n");
+	printf("Esimerkiksi: Kolme varista istuu aidalla. Yksi lahtee pois. Montako varista\njaa aidalle istumaan?\n\n");
 	printf("Sama voidaan ilmaista numeroin eli lukuarvoilla\n");
-	printf("Kolme varista (3). Variksista lahtee pois (-) yksi. Variksia aidalla yhteensa (=) ?\n");
-	printf("Eli: 3 - 1 = ?\n");
+	printf("Kolme varista (3). Variksista lahtee pois (-) yksi. Variksia aidalla\nyhteensa (=) ?\n");
+	printf("Eli: 3 - 1 = ?\n\n");
 	printf("Vahentamalla luvusta kolme (3) luku yksi (1) saadaan vastaukseksi kaksi (2)\n");
-	printf("Eli 3 - 1 = 2\n");
+	printf("Eli 3 - 1 = 2\n\n");
 	printf("Vastaus on siis kaksi varista\n");
 	printf("Haluatko harjoitustehtavan? (k/e)\n");
 
@@ -1041,6 +1042,7 @@ void erotusTeoria(void)
 			{
 				printf("Vastauksesi %d oli vaarin. Yrita uudeleen!\n", harjVastaus);
 				system("pause");
+				system("cls");
 			}
 		} while (harjVastaus != 4); //Looppi jatkuu kunnes vastataan oikein
 	}
@@ -1048,7 +1050,7 @@ void erotusTeoria(void)
 
 	else //Jos jotain muuta kuin k(ylla)
 	{
-		printf("Palataan valikkoon.");
+		printf("Palataan valikkoon.\n");
 		system("pause");
 	}
 }
