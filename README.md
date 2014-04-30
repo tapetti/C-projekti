@@ -1,3 +1,3 @@
 C-projekti
 ==========
-Jee
+Tämä on C-jatkokurssilla Tarmo Merimaan ja Janne Karin yhteisprojekti
